@@ -14,3 +14,7 @@ def userlogin():
 @app.route('/usersignup')
 def usersignup():
     return render_template('usersignup.html')
+
+@app.route('/playerdash')
+def playerdash():
+    return render_template('playerdashboard.html')
