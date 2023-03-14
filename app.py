@@ -1,4 +1,5 @@
 from flask import *
+from modules.user_management.signin import *
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -7,44 +8,36 @@ app = Flask(__name__)
 # db = SQLAlchemy(app)
 
 app.secret_key = 'csc536'
+
+
 @app.route('/')
 def index():
     return render_template('home.html')
 
 
-@app.route('/admin/signin',methods = ['GET', 'POST'])
-def admin_signin():
-        msg = ''
-        if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-            username = request.form['username']
-            password = request.form['password']
+@app.route('/signin', methods=['GET', 'POST'])
+def route_user_signin():
+    success_status: bool
+    success_status, msg, is_admin = user_signin(request)
+    if success_status:
+        if is_admin:
+            return redirect(url_for('route_admin_dashboard'))
+        else:
+            return redirect(url_for('route_user_dashboard'))
 
-            #cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-            #cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password,))
-            #account = cursor.fetchone()
-
-            account = {}
-
-            if username == 'admin' and password == 'pwd':
-                account = {
-                    'id':102,
-                    'username':'admin',
-                }
-
-            if account:
-                session['loggedin'] = True
-                session['id'] = account['id']
-                session['username'] = account['username']
-                msg = 'Logged in successfully !'
-                return render_template('admin_dashboard.html', msg=msg)
-            else:
-                msg = 'Incorrect username / password !'
-        return render_template('admin_signin.html', msg=msg)
+    else:
+        return render_template('userlogin.html', msg=msg)
 
 
-@app.route('/userlogin')
-def user_login():
-    return render_template('userlogin.html')
+@app.route('/admin/dashboard', methods=['GET', 'POST'])
+def route_admin_dashboard():
+    return render_template('admin_dashboard.html')
+
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+def route_user_dashboard():
+    return render_template('user_dashboard.html')
+
 
 @app.route('/usersignup')
 def usersignup():
