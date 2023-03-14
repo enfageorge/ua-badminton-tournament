@@ -8,7 +8,7 @@ def index():
     return render_template('index.html')
 
 @app.route('/userlogin', methods =['GET', 'POST'])
-def userlogin():
+def userlogin():  # need to be replace with real code talking to the database to do the authorization
     msg = ''
     if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
         username = request.form['username']
