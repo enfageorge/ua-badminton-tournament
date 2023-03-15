@@ -16,6 +16,27 @@ def index():
     return render_template('index.html')
 
 
+
+@app.route('/usersignup')
+def usersignup():
+    return render_template('usersignup.html')
+
+@app.route('/admindashboard')
+def admindashboard():
+    return render_template('admindashboard.html')
+
+@app.route('/admindashboard_form')
+def admindashboard_form():
+    return render_template('admindashboard_form.html')
+
+@app.route('/admindashboard_events')
+def admindashboard_events():
+    return render_template('admindashboard_events.html')
+
+@app.route('/admindashboard_matches')
+def admindashboard_matches():
+    return render_template('admindashboard_matches.html')
+    
 @app.route('/signup', methods=['GET', 'POST'])
 def route_user_signup():
     msg = user_signup(request)
@@ -47,3 +68,4 @@ def route_admin_dashboard():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def route_user_dashboard():
     return render_template('user_dashboard.html')
+
