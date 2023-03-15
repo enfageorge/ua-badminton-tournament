@@ -1,6 +1,6 @@
 from flask import *
 from modules.user_management.login import *
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 
 # Config
 
@@ -42,7 +42,7 @@ def admindashboard_matches():
 def route_user_signup():
     msg = user_signup(request)
     if msg == 'You have successfully registered !':
-        return redirect(url_for('route_user_dashboard'))
+        return render_template('userlogin.html', msg=msg)
     else:
         return render_template('usersignup.html', msg=msg)
 
@@ -61,12 +61,12 @@ def route_user_signin():
         return render_template('userlogin.html', msg=msg)
 
 
-@app.route('/admin/dashboard', methods=['GET', 'POST'])
+@app.route('/admindashboard', methods=['GET', 'POST'])
 def route_admin_dashboard():
-    return render_template('admin_dashboard.html')
+    return render_template('admindashboard.html')
 
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def route_user_dashboard():
-    return render_template('user_dashboard.html')
+    return render_template('playerdashboard.html')
 
