@@ -1,27 +1,19 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import *
+from modules.user_management.login import *
+from flask_sqlalchemy import SQLAlchemy
 
+# Config
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'PLACEHOLDER'  # TBA
+# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+# db = SQLAlchemy(app)
 app = Flask(__name__)
+app.secret_key = 'csc536'
 
 
 @app.route('/')
 def index():
     return render_template('index.html')
-
-@app.route('/userlogin', methods =['GET', 'POST'])
-def userlogin():  # need to be replace with real code talking to the database to do the authorization
-    msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form:
-        username = request.form['username']
-        password = request.form['password']
-        if username == 'admin' and password == '1234':
-            msg = 'Logged in successfully !'
-            return render_template('index.html', msg=msg)
-        elif username == 'jxu' and password == 'jf1234':
-            msg = 'Logged in successfully !'
-            return render_template('playerdashboard.html', msg=msg)
-        else:
-            msg = 'Incorrect username / password !'
-    return render_template('userlogin.html', msg=msg)
 
 @app.route('/usersignup')
 def usersignup():
@@ -30,3 +22,51 @@ def usersignup():
 @app.route('/playerdash')
 def playerdash():
     return render_template('playerdashboard.html')
+@app.route('/admindashboard')
+def admindashboard():
+    return render_template('admindashboard.html')
+
+@app.route('/admindashboard_form')
+def admindashboard_form():
+    return render_template('admindashboard_form.html')
+
+@app.route('/admindashboard_events')
+def admindashboard_events():
+    return render_template('admindashboard_events.html')
+
+@app.route('/admindashboard_matches')
+def admindashboard_matches():
+    return render_template('admindashboard_matches.html')
+    
+@app.route('/signup', methods=['GET', 'POST'])
+def route_user_signup():
+    msg = user_signup(request)
+    if msg == 'You have successfully registered !':
+        return redirect(url_for('route_user_dashboard'))
+    else:
+        return render_template('usersignup.html', msg=msg)
+
+
+@app.route('/signin', methods=['GET', 'POST'])
+def route_user_signin():
+    success_status: bool
+    success_status, msg, is_admin = user_signin(request)
+    if success_status:
+        if is_admin:
+            return redirect(url_for('route_admin_dashboard'))
+        else:
+            return redirect(url_for('route_user_dashboard'))
+
+    else:
+        return render_template('userlogin.html', msg=msg)
+
+
+@app.route('/admin/dashboard', methods=['GET', 'POST'])
+def route_admin_dashboard():
+    return render_template('admin_dashboard.html')
+
+
+@app.route('/dashboard', methods=['GET', 'POST'])
+def route_user_dashboard():
+    return render_template('user_dashboard.html')
+
