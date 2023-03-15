@@ -1,12 +1,13 @@
 from flask import *
-from modules.user_management.signin import *
+from modules.user_management.login import *
 from flask_sqlalchemy import SQLAlchemy
 
-app = Flask(__name__)
+# Config
+
 # app.config['SQLALCHEMY_DATABASE_URI'] = 'PLACEHOLDER'  # TBA
 # app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 # db = SQLAlchemy(app)
-
+app = Flask(__name__)
 app.secret_key = 'csc536'
 
 
@@ -39,6 +40,10 @@ def route_user_dashboard():
     return render_template('user_dashboard.html')
 
 
-@app.route('/usersignup')
-def usersignup():
-    return render_template('usersignup.html')
+@app.route('/signup', methods=['GET', 'POST'])
+def route_user_signup():
+    msg = user_signup(request)
+    if msg == 'You have successfully registered !':
+        return redirect(url_for('route_user_dashboard'))
+    else:
+        return render_template('usersignup.html', msg=msg)
