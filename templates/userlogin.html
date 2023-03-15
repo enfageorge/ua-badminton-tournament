@@ -15,14 +15,14 @@
                     <h1 class="word">User Login</h1>
                 </div></br></br></br>
                 <h2 class="word">
-                    <form action="{{ url_for('userlogin') }}" method="post">
+                    <form action="{{ url_for('route_user_signin') }}" method="post">
                         <div class="msg">{{ msg }}</div>
                         <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
                         <input id="password" name="password" type="password" placeholder="Enter Your Password" class="textbox"/></br></br></br>
                         <input type="submit" class="btn" value="Sign In"></br></br>
                     </form>
                 </h2>
-                <p class="bottom">Don't have an account?  <a class="bottom" href="{{url_for('usersignup')}}"> Sign Up here</a></p>
+                <p class="bottom">Don't have an account?  <a class="bottom" href="{{url_for('route_user_signup')}}"> Sign Up here</a></p>
             </div>
         </div>
     </body>
