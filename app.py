@@ -13,7 +13,16 @@ app.secret_key = 'csc536'
 
 @app.route('/')
 def index():
-    return render_template('home.html')
+    return render_template('index.html')
+
+
+@app.route('/signup', methods=['GET', 'POST'])
+def route_user_signup():
+    msg = user_signup(request)
+    if msg == 'You have successfully registered !':
+        return redirect(url_for('route_user_dashboard'))
+    else:
+        return render_template('usersignup.html', msg=msg)
 
 
 @app.route('/signin', methods=['GET', 'POST'])
@@ -38,12 +47,3 @@ def route_admin_dashboard():
 @app.route('/dashboard', methods=['GET', 'POST'])
 def route_user_dashboard():
     return render_template('user_dashboard.html')
-
-
-@app.route('/signup', methods=['GET', 'POST'])
-def route_user_signup():
-    msg = user_signup(request)
-    if msg == 'You have successfully registered !':
-        return redirect(url_for('route_user_dashboard'))
-    else:
-        return render_template('usersignup.html', msg=msg)
