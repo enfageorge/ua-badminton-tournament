@@ -15,17 +15,6 @@ app.secret_key = 'csc536'
 def index():
     return render_template('index.html')
 
-@app.route('/usersignup')
-def usersignup():
-    return render_template('usersignup.html')
-
-@app.route('/playerdash')
-def playerdash():
-    return render_template('playerdashboard.html')
-@app.route('/admindashboard')
-def admindashboard():
-    return render_template('admindashboard.html')
-
 @app.route('/admindashboard_form')
 def admindashboard_form():
     return render_template('admindashboard_form.html')
