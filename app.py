@@ -69,6 +69,10 @@ def route_public_interface():
 def publicview_tournament_details():
     return render_template('publicview_tournament_details.html')
 
+@app.route('/publicview_players')
+def publicview_players():
+    return render_template('publicview_players.html')
+
 @app.route('/publicview_events')
 def publicview_events():
     return render_template('publicview_events.html')
