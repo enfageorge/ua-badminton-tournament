@@ -18,9 +18,9 @@
     <link href="static/dataTables.bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
+    <div id="wrapper-public">
+        <nav class="navbar navbar-default top-navbar-public" role="navigation">
+            <div class="navbar-header-public">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
@@ -55,22 +55,22 @@
             <div class="sidebar-collapse">
                 <ul class="nav" id="main-menu">
                     <li>
-                        <a class="active-menu" href="{{url_for('route_public_interface')}}"><i class="fa fa-dashboard"></i> HOME</a>
+                        <a class="active-menu-public" href="{{url_for('route_public_interface')}}"><i class="fa fa-dashboard"></i> HOME</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="{{url_for('publicview_tournament_details')}}"><i class="fa fa-edit"></i> Tournament</a>
+                        <a class="active-menu-public" href="{{url_for('publicview_tournament_details')}}"><i class="fa fa-edit"></i> Tournament</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="{{url_for('publicview_players')}}"><i class="fa fa-desktop"></i> Players</a>
+                        <a class="active-menu-public" href="{{url_for('publicview_players')}}"><i class="fa fa-desktop"></i> Players</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="{{url_for('publicview_events')}}"><i class="fa fa-desktop"></i> Events</a>
+                        <a class="active-menu-public" href="{{url_for('publicview_events')}}"><i class="fa fa-desktop"></i> Events</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="{{url_for('publicview_draws')}}"><i class="fa fa-desktop"></i> Draws</a>
+                        <a class="active-menu-public" href="{{url_for('publicview_draws')}}"><i class="fa fa-desktop"></i> Draws</a>
                     </li>
                     <li>
-                        <a class="active-menu" href="{{url_for('publicview_matches')}}"><i class="fa fa-table"></i> Matches</a>
+                        <a class="active-menu-public" href="{{url_for('publicview_matches')}}"><i class="fa fa-table"></i> Matches</a>
                     </li>
                 </ul>
 
