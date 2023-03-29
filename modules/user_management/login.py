@@ -55,7 +55,7 @@ def user_signup(request):
         elif username == 'user0':
             msg = 'Username already exists. Choose a different username'
         else:
-            # cursor.execute('INSERT INTO accounts VALUES (NULL, % s, % s, % s)', (username, password, email,))
+            # cursor.execute('INSERT INTO User VALUES (NULL, % s, % s, % s)', (username, password, email,))
             # mysql.connection.commit()
             msg = 'You have successfully registered !'
     return msg

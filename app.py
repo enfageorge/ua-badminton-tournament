@@ -1,5 +1,6 @@
 from flask import *
-from modules.user_management.login import *
+from modules.user_management.routes import user_management_app
+
 # from flask_sqlalchemy import SQLAlchemy
 
 # Config
@@ -9,6 +10,8 @@ from modules.user_management.login import *
 # db = SQLAlchemy(app)
 app = Flask(__name__)
 app.secret_key = 'csc536'
+app.register_blueprint(user_management_app)
+
 
 
 @app.route('/')
@@ -27,27 +30,7 @@ def admindashboard_events():
 def admindashboard_matches():
     return render_template('admindashboard_matches.html')
     
-@app.route('/signup', methods=['GET', 'POST'])
-def route_user_signup():
-    msg = user_signup(request)
-    if msg == 'You have successfully registered !':
-        return render_template('userlogin.html', msg=msg)
-    else:
-        return render_template('usersignup.html', msg=msg)
 
-
-@app.route('/signin', methods=['GET', 'POST'])
-def route_user_signin():
-    success_status: bool
-    success_status, msg, is_admin = user_signin(request)
-    if success_status:
-        if is_admin:
-            return redirect(url_for('route_admin_dashboard'))
-        else:
-            return redirect(url_for('route_user_dashboard'))
-
-    else:
-        return render_template('userlogin.html', msg=msg)
 
 
 @app.route('/admindashboard', methods=['GET', 'POST'])
