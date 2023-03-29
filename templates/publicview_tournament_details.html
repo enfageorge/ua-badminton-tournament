@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <titleUA Badminton Tournament</title>
+	<!-- Bootstrap Styles-->
+    <link href="static/bootstrap.css" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link href="static/font-awesome.css" rel="stylesheet" />
+        <!-- Custom Styles-->
+    <link href="static/adminCustomStyle.css" rel="stylesheet" />
+     <!-- Google Fonts-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+<body>
+    <div id="wrapper-public">
+        <nav class="navbar navbar-default top-navbar-public" role="navigation">
+            <div class="navbar-header-public">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">UA Badminton Tournament</a>
+            </div>
+        </nav>
+        <!--/. NAV TOP  -->
+        <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+                    <li>
+                        <a class="active-menu-public" href="{{url_for('route_public_interface')}}"><i class="fa fa-dashboard"></i> HOME</a>
+                    </li>
+                    <li>
+                        <a class="active-menu-public" href="{{url_for('publicview_tournament_details')}}"><i class="fa fa-edit"></i> Tournament</a>
+                    </li>
+                    <li>
+                        <a class="active-menu-public" href="{{url_for('publicview_players')}}"><i class="fa fa-desktop"></i> Players</a>
+                    </li>
+                    <li>
+                        <a class="active-menu-public" href="{{url_for('publicview_events')}}"><i class="fa fa-desktop"></i> Events</a>
+                    </li>
+                    <li>
+                        <a class="active-menu-public" href="{{url_for('publicview_draws')}}"><i class="fa fa-desktop"></i> Draws</a>
+                    </li>
+                    <li>
+                        <a class="active-menu-public" href="{{url_for('publicview_matches')}}"><i class="fa fa-table"></i> Matches</a>
+                    </li>
+                </ul>
+
+            </div>
+
+        </nav>
+        <!-- /. NAV SIDE  -->
+
+        <div id="page-wrapper" >
+            <div id="page-inner">
+			    <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="page-header">
+                            Active Tournament Details <small></small>
+                        </h1>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-10 col-sm-4">
+                        <div class="panel panel-primary-public">
+                            <div class="panel-heading">
+                                General Information
+                            </div>
+                            <div class="panel-body">
+                                <p>2023 Smashcat Tournament</p>
+                                Date: 08/11/2023 <br>
+                                Location: Tucson, USA <br>
+                                Venue: UA Rec Center South Gym <br>
+                                Contact: Julie Fan (juliefan@arizona.edu) <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-5 col-sm-4">
+                        <div class="panel panel-primary-public">
+                            <div class="panel-heading">
+                                Important Dates
+                            </div>
+                            <div class="panel-body">
+                                Registration Open: <br>
+                                08/11/2023 <br>
+                                Entry deadline: <br>
+                                08/12/2023 <br>
+                                Withdrawal deadline: <br>
+                                08/13/2023 <br>
+                                Start tournament <br>
+                                08/14/2023 <br>
+                                End of tournament: <br>
+                                08/15/2023 <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-4">
+                        <div class="panel panel-primary-public">
+                            <div class="panel-heading">
+                                Venue Direction
+                            </div>
+                            <div class="panel-body">
+                                <p>University of Arizona Recreation Center, South Gym</p>
+                                Address: <br>
+                                1400 E 6th Street 85721 Tucson Arizona U.S.A
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-5 col-sm-4">
+                        <div class="panel panel-primary-public">
+                            <div class="panel-heading">
+                                Events
+                            </div>
+                            <div class="panel-body">
+                                MS <br>
+                                MD <br>
+                                WS <br>
+                                WD <br>
+                                XD <br>
+                                U19 <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-5 col-sm-4">
+                        <div class="panel panel-primary-public">
+                            <div class="panel-heading">
+                                Contact
+                            </div>
+                            <div class="panel-body">
+                                <p>UA Badminton Club Organization</p>
+                                Person of Contact: Julie Fan <br>
+                                Email: juliefan@arizona.edu <br>
+                                Phone: 520-123-3344 <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+                <div class="row">
+                    <div class="col-md-10 col-sm-4">
+                        <div class="panel panel-primary-public">
+                            <div class="panel-heading">
+                                Regulation
+                            </div>
+                            <div class="panel-body">
+                                Fee per player: Fee includes rec center access, shuttles, lunch, and refreshments. <br>
+                                1 Event: $30 2 Events: $35 3 events: $40 Under 15: $15 (additional events +$5 per event) <br>
+                                <br>
+                                Online payment: We strongly encourage all the participants to pay online. <br>
+                                Zelle email: uazbadminton@gmail.com <br>
+                                Cash app: $uabadminton <br>
+                                <br>
+                                Currently, the maximum number of events allowed per person is 3. <br>
+                                <br>
+                                We will follow the ABCD drop flight format of play (triple elimination). If an event has less than 8 entries, then we will have one draw with single elimination format with a consolation draw. <br>
+                                If you have any questions about the ABCD format or the tournament, please feel free to contact us at uazbadminton@gmail.com. <br>
+                                <br>
+                                We are giving away trophies to the winners and runners of A and B divisons, and only to the winners of C and D division. <br>
+                                Light refreshments, snacks, and lunch will be provided. <br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /. ROW  -->
+			</div>
+             <!-- /. PAGE INNER  -->
+        </div>
+         <!-- /. PAGE WRAPPER  -->
+    </div>
+     <!-- /. WRAPPER  -->
+</body>
+</html>

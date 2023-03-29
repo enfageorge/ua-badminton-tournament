@@ -42,3 +42,28 @@ def route_admin_dashboard():
 def route_user_dashboard():
     return render_template('playerdashboard.html')
 
+
+# public view interface section
+@app.route('/publicview_home', methods=['GET', 'POST'])
+def route_public_interface():
+    return render_template('publicview_home.html')
+
+@app.route('/publicview_tournament')
+def publicview_tournament_details():
+    return render_template('publicview_tournament_details.html')
+
+@app.route('/publicview_players')
+def publicview_players():
+    return render_template('publicview_players.html')
+
+@app.route('/publicview_events')
+def publicview_events():
+    return render_template('publicview_events.html')
+
+@app.route('/publicview_draws')
+def publicview_draws():
+    return render_template('publicview_draws.html')
+
+@app.route('/publicview_matches')
+def publicview_matches():
+    return render_template('publicview_matches.html')
