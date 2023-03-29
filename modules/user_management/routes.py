@@ -21,7 +21,11 @@ def route_user_signin():
         if is_admin:
             return redirect(url_for('route_admin_dashboard'))
         else:
-            return redirect(url_for('route_user_dashboard'))
+            return redirect(url_for('route_player_dashboard'))
 
     else:
         return render_template('userlogin.html', msg=msg)
+
+@user_management_app.route('/dashboard', methods=['GET', 'POST'])
+def route_player_dashboard():
+    return render_template('playerdashboard.html',user_details)
