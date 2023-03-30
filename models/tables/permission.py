@@ -7,13 +7,14 @@ Class Permission: Stores rwx permissions for Admins and Players
 
 class Permission(db.Model):
     __tablename__ = "permission"
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     read = db.Column(db.Boolean, nullable=False)
     write = db.Column(db.Boolean, nullable=False)
     delete = db.Column(db.Boolean, nullable=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('permission.id'))
+    user_permission = db.relationship('UserPermission', backref='permission', lazy=True)
 
-    def __init__(self, id: int , read: bool, write: bool, delete: bool, user_id=None):
+
+    def __init__(self, read: bool, write: bool, delete: bool, user_id=None):
         """
         Constructor for Permission Table
         :param id: Primary Key for the Permission Table
@@ -22,11 +23,9 @@ class Permission(db.Model):
         :param delete: Data delete permission
         :param user_id: Foreign Key for User Table
         """
-        self.id = id
         self.read = read
         self.write = write
         self.delete = delete
-        self.user_id = user_id
 
     def __repr__(self):
         return "<Permissions(id='%s', read='%s', write='%s', delete'%s')>" % (
