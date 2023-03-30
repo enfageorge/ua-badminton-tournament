@@ -1,3 +1,4 @@
+from datetime import datetime
 from app import db
 
 """
@@ -10,10 +11,10 @@ class Tournament(db.Model):
     tournament_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     tournament_name = db.Column(db.String(50), nullable=False)
     location = db.Column(db.String(50), nullable=False)
-    registration_open = db.Column(db.String(10), nullable=False)  # MM-DD-YYYY
-    registration_closed = db.Column(db.String(10), nullable=False)  # MM-DD-YYYY
-    tournament_start_date = db.Column(db.String(10), nullable=False)  # MM-DD-YYYY
-    tournament_end_date = db.Column(db.String(10), nullable=False)  # MM-DD-YYYY
+    registration_open = db.Column(db.Date, default=datetime.utcnow())
+    registration_closed = db.Column(db.Date, default=datetime.utcnow())
+    tournament_start_date = db.Column(db.Date, default=datetime.utcnow())
+    tournament_end_date = db.Column(db.Date, default=datetime.utcnow())
 
     def __init__(self, tournament_name: str, location: str, registration_open: str, registration_closed: str,
                  tournament_start_date: str, tournament_end_date: str) -> None:

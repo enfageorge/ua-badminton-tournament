@@ -1,6 +1,6 @@
 from app import db
 from sqlalchemy import ForeignKey
-
+from datetime import datetime
 """
 Class Match, stores information relation to match that belongs to a Tournament and an Event
 """
@@ -9,7 +9,7 @@ Class Match, stores information relation to match that belongs to a Tournament a
 class Match(db.Model):
     __tablename__ = "match"
     match_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    date = db.Column(db.String(10), nullable=False)  # MM-DD-YYYY format
+    date = db.Column(db.Date, default=datetime.utcnow())
     side_one_player_1 = db.Column(db.Integer, ForeignKey('player.id'), nullable=False)
     side_one_player_2 = db.Column(db.Integer, ForeignKey('player.id'), nullable=True)
     side_two_player_1 = db.Column(db.Integer, ForeignKey('player.id'), nullable=False)
