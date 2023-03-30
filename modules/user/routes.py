@@ -21,12 +21,7 @@ def signin():
         if is_admin:
             return redirect(url_for('admin.admin_dashboard'))
         else:
-            return redirect(url_for('user.player_dashboard'))
+            return redirect(url_for('player.player_dashboard'))
 
     else:
         return render_template('user/login.html', msg=msg)
-
-
-@user_app.route('/dashboard', methods=['GET', 'POST'])
-def player_dashboard():
-    return render_template('player/player_dashboard.html')
