@@ -1,7 +1,7 @@
 from app import db
 
 """
-Class Login stores Login information related to Users (Admin and Players)
+Class User Permission stores Permission ID corresponding to User ID, This table forms a composite key between the two.
 """
 
 
