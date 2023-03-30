@@ -7,15 +7,13 @@ Class Login stores Login information related to Users (Admin and Players)
 
 class Login(db.Model):
     __tablename__ = "login"
-    id = db.Column(db.Integer, primary_key=True)
+    login_id = db.Column(db.String(50), primary_key=True)
     password = db.Column(db.String(20), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user = db.relationship('User', backref='login', lazy=True)
 
-    def __init__(self, id: int, password: str, user_id=None):
-        self.id = id
+    def __init__(self, login_id: str, password: str):
+        self.login_id = login_id
         self.password = password
-        self.user_id = user_id
 
     def __repr__(self):
-        return "<Login(first_name='%s', last_name='%s', competing_gender'%s')>" % (
-            self.first_name, self.last_name, self.competing_gender)
+        return "<Login(login_id='%s', password='%s')>" % (self.login_id, self.password)

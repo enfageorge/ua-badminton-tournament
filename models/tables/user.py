@@ -10,31 +10,26 @@ Login credentials for Admin and Players are stored in 'Login' class
 
 class User(db.Model):
     __tablename__ = "user"
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(20), nullable=False)
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=True)
     email = db.Column(db.String(30), unique=True, nullable=False)
-    is_player = db.Relationship('Player', uselist=False)
-    permission = db.Relationship('Permission', uselist=False)
-    login = db.Relationship('Login', uselist=False)
+    login_id = db.Column(db.String(50), db.ForeignKey('login.login_id'))
+    player = db.relationship('Player', backref='user', lazy=True)
+    user_permission = db.relationship('UserPermission', backref='user', lazy=True)
 
-    def __init__(self, id, first_name, last_name, email, is_player=None, permission=None):
+    def __init__(self, first_name, email, last_name=None):
         """
         Constructor for User Table
-        :param id: Primary key for the User Table
-        :param first_name: first name of the user
-        :param last_name: last name of the user
-        :param email: email of the user
-        :param is_player: determines if the user is a player
-        :param permission: permissions for the user
+        :param first_name: First name of the user
+        :param last_name: Last name of the user
+        :param email: Email of the user
+        :param user_id: User ID of the user
         """
-        self.id = id
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
-        self.is_player = is_player
-        self.permission = permission
 
     def __repr__(self):
-        return "<User(first_name='%s', last_name='%s')>" % (self.first_name, self.last_name)
+        return "<User(first_name='%s', last_name='%s', email='%s')>" % \
+            (self.first_name, self.last_name, self.email)
