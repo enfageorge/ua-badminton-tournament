@@ -15,7 +15,7 @@
                     <h1 class="word">User Login</h1>
                 </div></br></br></br>
                 <h2 class="word">
-                    <form action="{{ url_for('user_management.route_user_signin') }}" method="post">
+                    <form action="{{ url_for('user.signin') }}" method="post">
                         <div class="msg">{{ msg }}</div></br>
                         <label>Username:</label></br>
                         <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
@@ -24,7 +24,7 @@
                         <input type="submit" class="btn" value="Sign In"></br></br>
                     </form>
                 </h2>
-                <p class="bottom">Don't have an account?  <a class="bottom" href="{{url_for('user_management.route_user_signup')}}"> Sign Up here</a></p>
+                <p class="bottom">Don't have an account?  <a class="bottom" href="{{url_for('user.signup')}}"> Sign Up here</a></p>
             </div>
         </div>
     </body>

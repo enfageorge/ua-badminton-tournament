@@ -15,7 +15,7 @@
                     <h1 class="word">Player Sign-up</h1>
                 </div></br></br></br>
                 <h2 class="word">
-                    <form action="{{ url_for('user_management.route_user_signup') }}" method="post">
+                    <form action="{{ url_for('user.signup') }}" method="post">
                         <div class="msg">{{ msg }}</div>
                         <label>Username:</label></br>
                         <input id="username" name="username" type="text" placeholder="Enter Your Username" class="textbox"/></br></br>
@@ -28,7 +28,7 @@
                         <input type="submit" class="btn" value="Sign Up"></br>
                     </form>
                 </h2>
-                <p class="bottom">Already have an account?  <a class="bottom" href="{{url_for('user_management.route_user_signin')}}"> Sign In here</a></p>
+                <p class="bottom">Already have an account?  <a class="bottom" href="{{url_for('user.signin')}}"> Sign In here</a></p>
             </div>
         </div>
     </body>
