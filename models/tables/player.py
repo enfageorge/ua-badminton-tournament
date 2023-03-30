@@ -14,7 +14,7 @@ class Player(db.Model):
     phone_number = db.Column(db.String(10), nullable=True)
     dob = db.Column(db.String(10), nullable=False)  # MM-DD-YYYY
     club_name = db.Column(db.String(30), nullable=True)
-
+    matches = db.relationship('Match', backref='player', lazy=True)
 
     def __init__(self, player_id: int, seeding_score: int, social_media_consent: bool, competing_gender: str,
                  phone_number: str, dob: str, club_name: str):
