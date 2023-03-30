@@ -28,4 +28,4 @@ def route_user_signin():
 
 @user_management_app.route('/dashboard', methods=['GET', 'POST'])
 def route_player_dashboard():
-    return render_template('playerdashboard.html',user_details)
+    return render_template('player/playerdashboard.html', user_details)

@@ -1,6 +1,6 @@
 from flask import session
 '''
-This file contains functions that manage user signin and signup
+This file contains functions that manage player signin and signup
 '''
 
 
@@ -23,10 +23,10 @@ def user_signin(request):
             session['username'] = account['username']
 
             return True, 'Logged in', True
-        elif username == 'user' and password == 'pwd':
+        elif username == 'player' and password == 'pwd':
             account = {
                 'id': 400,
-                'username': 'user',
+                'username': 'player',
             }
             session['loggedin'] = True
             session['id'] = account['id']

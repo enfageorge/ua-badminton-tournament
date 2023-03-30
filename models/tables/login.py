@@ -9,7 +9,7 @@ class Login(db.Model):
     __tablename__ = "login"
     id = db.Column(db.Integer, primary_key=True)
     password = db.Column(db.String(20), nullable=False)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('player.id'))
 
     def __init__(self, id: int, password: str, user_id=None):
         self.id = id

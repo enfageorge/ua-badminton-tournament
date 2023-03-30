@@ -13,7 +13,7 @@ class Player(db.Model):
     competing_gender = db.Column(db.Char, nullable=False)
     phone_number = db.Column(db.String(10), nullable=True)
     dob = db.Column(db.String(10), nullable=False)  # MM-DD-YYYY
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('player.id'))
 
     def __init__(self, id: int, seeding_score: int, social_media_consent: bool, competing_gender: str,
                  phone_number: str, dob: str, user_id=None):

@@ -9,7 +9,7 @@ Login credentials for Admin and Players are stored in 'Login' class
 
 
 class User(db.Model):
-    __tablename__ = "user"
+    __tablename__ = "player"
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), nullable=False)
     first_name = db.Column(db.String(20), nullable=False)
@@ -23,11 +23,11 @@ class User(db.Model):
         """
         Constructor for User Table
         :param id: Primary key for the User Table
-        :param first_name: first name of the user
-        :param last_name: last name of the user
-        :param email: email of the user
-        :param is_player: determines if the user is a player
-        :param permission: permissions for the user
+        :param first_name: first name of the player
+        :param last_name: last name of the player
+        :param email: email of the player
+        :param is_player: determines if the player is a player
+        :param permission: permissions for the player
         """
         self.id = id
         self.first_name = first_name
