@@ -9,7 +9,7 @@ class Event(db.Model):
     __tablename__ = "event"
     event_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     event_name = db.Column(db.String(50))
-    gender_allowed = db.Column(db.String(10), nullable=False)
+    gender_allowed = db.Column(db.String(10), nullable=True)
     max_participants_allowed = db.Column(db.Integer, nullable=True)
     matches = db.relationship("Match", backref="event", lazy=True)
 
