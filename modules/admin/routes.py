@@ -1,23 +1,33 @@
 from flask import Blueprint, render_template
+from modules.admin.dashboard_home import get_player_details
+from modules.admin.dashboard_tournament import get_tournament_details
+from modules.admin.dashboard_events import get_event_details
+from modules.admin.dashboard_matches import get_matches_details
+
+
 
 admin_app = Blueprint("admin", __name__)
 
 
 @admin_app.route('/admin', methods=['GET', 'POST'])
 def admin_dashboard():
-    return render_template('admin/admin_dashboard.html')
+    player_details = get_player_details('username')
+    return render_template('admin/admin_dashboard.html', msg = player_details)
 
 
 @admin_app.route('/admin/tournament')
 def admin_form():
-    return render_template('admin/admin_form.html')
+    tournament_details = get_tournament_details('username')
+    return render_template('admin/admin_form.html', msg = tournament_details)
 
 
 @admin_app.route('/admin/events')
 def admin_events():
-    return render_template('admin/admin_events.html')
+    event_details = get_event_details('username')
+    return render_template('admin/admin_events.html',  msg = event_details)
 
 
 @admin_app.route('/admin/matches')
 def admin_matches():
-    return render_template('admin/admin_matches.html')
+    matche_details = get_matches_details('username')
+    return render_template('admin/admin_matches.html', msg = matche_details)
