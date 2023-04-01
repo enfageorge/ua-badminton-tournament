@@ -295,12 +295,12 @@ background:none;
     position: relative;
     display: block;
     padding: 19px 15px;
-    color: #77C0FD;
+    color: #fff;       /* log In font color */
 }
 .top-navbar-public .nav > li > a:hover, .top-navbar-public .nav > li > a:focus {
     text-decoration: none;
-    background-color: #225081;
-    color: #fff;
+    background-color: #ffffff;
+    color: #1f5730;       /* log In hover colors */
 }
 .top-navbar-public .dropdown-menu{
     min-width: 230px;
@@ -334,6 +334,9 @@ padding-top: 4px;
 }
 .active-menu-public {
     background-color:#32a856!important;
+}
+.active-signin-public {
+    background-color:#1f5730!important;
 }
 
 .arrow {

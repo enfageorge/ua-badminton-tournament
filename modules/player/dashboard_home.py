@@ -25,4 +25,6 @@ def get_player_profile_details(username):
 
     }
 
-    return user_account | player_account
+    return_account = {**user_account, **player_account}
+
+    return return_account
