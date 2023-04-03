@@ -1,4 +1,4 @@
-from app import db
+from database import db
 
 """
 Class Permission: Stores rwx permissions for Admins and Players

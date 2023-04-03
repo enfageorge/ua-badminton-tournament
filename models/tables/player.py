@@ -8,10 +8,10 @@ Class Player, stores information relation to badminton players
 
 class Player(db.Model):
     __tablename__ = "player"
-    player_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     seeding_score = db.Column(db.Integer, nullable=True)
     social_media_consent = db.Column(db.Boolean, nullable=False)
-    competing_gender = db.Column(db.String(10), nullable=True)
+    competing_gender = db.Column(db.String(10), nullable=False)
     phone_number = db.Column(db.String(10), nullable=True)
     dob = db.Column(db.Date, default=datetime.utcnow())
     club_name = db.Column(db.String(30), nullable=True)

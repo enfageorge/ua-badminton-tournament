@@ -1,4 +1,4 @@
-from app import db
+from database import db
 
 """
 Class Event, stores information related to an event such as "U15", "WomenSingles", "WomenDoubles"
