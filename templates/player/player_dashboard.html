@@ -92,7 +92,7 @@
                             <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form">
+                                    <form role="form" action="{{url_for('player.player_dashboard')}}" method="post">
                                         <div class="form-group">
                                             <label>Player first name:</label>
                                             <div class="msg">{{ msg.first_name }}</div>
@@ -109,69 +109,69 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Email:</label>
-                                            <input class="form-control" placeholder="Enter your email" value={{msg.email}}>
+                                            <input class="form-control" id="email" name="email" type="text" placeholder="Enter your email" value={{msg.email}}>
                                         </div>
                                         <div class="form-group">
                                             <label>Phone number:</label>
-                                            <input class="form-control" placeholder="Enter your phone number" value={{msg.phone_number}}>
+                                            <input class="form-control" id="phone_number" name="phone_number" type="text" placeholder="Enter your phone number" value={{msg.phone_number}}>
                                         </div>
                                         <div class="form-group">
                                             <label>Gender:</label>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked="">male
+                                                    <input type="radio" name="gender_optionsRadios" id="optionsRadios1" value="m" checked="">Male
                                                 </label>
                                             </div>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">female
+                                                    <input type="radio" name="gender_optionsRadios" id="optionsRadios2" value="f">Female
                                                 </label>
                                             </div>
                                             <div class="radio">
                                                 <label>
-                                                    <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Others
+                                                    <input type="radio" name="gender_optionsRadios" id="optionsRadios3" value="o">Others
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Date of Birth:</label>
-                                            <input class="form-control" placeholder="Enter your DOB" value={{msg.dob}}>
+                                            <input class="form-control" id="dob" name="dob" type="text"placeholder="Enter your DOB" value={{msg.dob}}>
                                         </div>
                                         <div class="form-group">
                                             <label>Club Name:</label>
-                                            <input class="form-control" placeholder="Enter your club" value={{msg.club_name}}>
+                                            <input class="form-control" id="club_name" name="club_name" type="text" placeholder="Enter your club" value={{msg.club_name}}>
                                             <p class="help-block">Ex. UA Badminton Club</p>
                                         </div>
                                         <div class="form-group">
                                             <label>Events:</label>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">MS
+                                                    <input type="checkbox" name="event1" value="ms">MS
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">MD
+                                                    <input type="checkbox" name="event2" value="md">MD
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">WS
+                                                    <input type="checkbox" name="event3" value="ws">WS
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">WD
+                                                    <input type="checkbox" name="event4" value="wd">WD
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">XD
+                                                    <input type="checkbox" name="event5" value="xd">XD
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">U19
+                                                    <input type="checkbox" name="event6" value="u19">U19
                                                 </label>
                                             </div>
                                         </div>
