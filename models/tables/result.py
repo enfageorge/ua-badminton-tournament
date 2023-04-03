@@ -1,4 +1,4 @@
-from app import db
+from database import db
 
 """
 Class Result, stores the result corresponding to a Match

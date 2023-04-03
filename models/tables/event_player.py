@@ -1,4 +1,4 @@
-from app import db
+from database import db
 
 """
 Class representing the user-event interest table, with a many-to-many relationship between event & players.

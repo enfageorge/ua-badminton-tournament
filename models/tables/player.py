@@ -1,5 +1,5 @@
 from datetime import datetime
-from app import db
+from database import db
 
 """
 Class Player, stores information relation to badminton players
@@ -17,7 +17,6 @@ class Player(db.Model):
     club_name = db.Column(db.String(30), nullable=True)
     matches = db.relationship('Match', backref='player', lazy=True)
     event_player = db.relationship('EventPlayer', backref='player', lazy=True)
-
 
     def __init__(self, player_id: int, seeding_score: int, social_media_consent: bool, competing_gender: str,
                  phone_number: str, dob: str, club_name: str):

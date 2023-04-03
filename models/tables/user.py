@@ -1,4 +1,4 @@
-from app import db
+from database import db
 
 """
 Class User: Users consist of Admin and Players, this table stores infromation relation to users
