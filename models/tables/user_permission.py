@@ -1,12 +1,12 @@
 from app import db
 
 """
-Class Login stores Login information related to Users (Admin and Players)
+Class User Permission stores Permission ID corresponding to User ID, This table forms a composite key between the two.
 """
 
 
 class UserPermission(db.Model):
-    __tablename__ = "userpermission"
+    __tablename__ = "user_permission"
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     permission_id = db.Column(db.Integer, db.ForeignKey('permission.id'), primary_key=True)
 
