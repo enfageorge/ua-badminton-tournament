@@ -1,10 +1,9 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
+
 from modules.admin.dashboard_home import get_player_details
 from modules.admin.dashboard_tournament import get_tournament_details
 from modules.admin.dashboard_events import get_event_details
 from modules.admin.dashboard_matches import get_matches_details
-
-
 
 admin_app = Blueprint("admin", __name__)
 
