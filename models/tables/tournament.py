@@ -1,5 +1,5 @@
 from datetime import datetime
-from database import db
+from app import db
 
 """
 Class Tournament, stores information relation to Tournament

@@ -1,4 +1,4 @@
-from database import db
+from app import db
 
 """
 Class Event, stores information related to an event such as "U15", "WomenSingles", "WomenDoubles"
@@ -11,8 +11,8 @@ class Event(db.Model):
     event_name = db.Column(db.String(50))
     gender_allowed = db.Column(db.String(10), nullable=True)
     max_participants_allowed = db.Column(db.Integer, nullable=True)
-    matches = db.relationship("Match", backref="event", lazy=True)
-    event_player = db.relationship('EventPlayer', backref='event', lazy=True)
+    #matches = db.relationship("Match", backref="event", lazy=True)
+    #event_player = db.relationship('EventPlayer', backref='event', lazy=True)
 
     def __init__(self, event_name: str, gender_allowed: str = None, max_participants_allowed: int = None) -> None:
         """
