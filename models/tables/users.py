@@ -16,8 +16,8 @@ class Users(db.Model):
     email = db.Column(db.String(30), unique=True, nullable=False)
     login_id = db.Column(db.String(50), db.ForeignKey('login.login_id'))
     player = db.relationship('Player', backref='users', lazy=True)
+    #user_permission = db.relationship('UserPermission', backref='users', lazy=True)
 
-    # user_permission = db.relationship('UserPermission', backref='users', lazy=True)
 
     def __init__(self, first_name, email, last_name, login_id):
         """

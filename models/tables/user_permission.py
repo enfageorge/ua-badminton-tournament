@@ -1,4 +1,4 @@
-from database import db
+from app import db
 
 """
 Class User Permission stores Permission ID corresponding to User ID, This table forms a composite key between the two.
