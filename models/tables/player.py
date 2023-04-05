@@ -23,7 +23,7 @@ class Player(db.Model):
                  phone_number: str, dob: str, club_name: str):
         """
         Constructor for Player Table
-        :param player_id: Primary for the Player Table, FK references User table
+        :param player_id: Primary for the Player Table, FK references Users table
         :param seeding_score: the seeding score based on which players are ranked
         :param social_media_consent: if True, player agrees for photography/videography
         :param competing_gender: Determines eligibility for playing in competing gender specific matches
