@@ -11,13 +11,12 @@ class Player(db.Model):
     player_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     seeding_score = db.Column(db.Integer, nullable=True)
     social_media_consent = db.Column(db.Boolean, nullable=False)
-    competing_gender = db.Column(db.String(10), nullable=True)
+    competing_gender = db.Column(db.String(10), nullable=False)
     phone_number = db.Column(db.String(10), nullable=True)
     dob = db.Column(db.Date, default=datetime.utcnow())
     club_name = db.Column(db.String(30), nullable=True)
-
-    # matches = db.relationship('Match', backref='player', lazy=True)
-    # event_player = db.relationship('EventPlayer', backref='player', lazy=True)
+    #matches = db.relationship('Match', backref='player', lazy=True)
+    #event_player = db.relationship('EventPlayer', backref='player', lazy=True)
 
     def __init__(self, player_id: int, seeding_score: int, social_media_consent: bool, competing_gender: str,
                  phone_number: str, dob: str, club_name: str):

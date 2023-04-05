@@ -1,5 +1,6 @@
 from flask import session
-from models.tables import Login, User
+from models.tables.login import Login
+from models.tables.users import Users
 
 '''
 This file contains functions that manage player signin and signup
@@ -18,7 +19,7 @@ def user_signin(request):
             correct_password = login_user.password
             if password == correct_password:
                 session['logged_in'] = True
-                user_obj = User.query.filter_by(login_id=username).first()
+                user_obj = Users.query.filter_by(login_id=username).first()
                 session['user_id'] = user_obj.id
                 return True, 'Logged in'
             elif password != correct_password:
@@ -38,7 +39,7 @@ def user_signup(request):
 
         # Check if user already exists in db:
         login_user = Login.query.get(username)
-        user_exists = User.query.filter_by(email=email).first()
+        user_exists = Users.query.filter_by(email=email).first()
         if login_user:
             if user_exists:
                 if user_exists.email == email:  # username and email found in db
