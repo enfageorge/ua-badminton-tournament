@@ -17,6 +17,14 @@ class Match(db.Model):
     tournament_id = db.Column(db.Integer, ForeignKey('tournament.tournament_id'), nullable=False)
     event_id = db.Column(db.Integer, ForeignKey('event.event_id'), nullable=False)
     result_id = db.Column(db.Integer, ForeignKey('result.result_id'), nullable=True)
+    side_one_player_1_rel = db.relationship('Player', foreign_keys=[side_one_player_1],
+                                            backref='matches_side_one_player_1')
+    side_one_player_2_rel = db.relationship('Player', foreign_keys=[side_one_player_2],
+                                            backref='matches_side_one_player_2')
+    side_two_player_1_rel = db.relationship('Player', foreign_keys=[side_two_player_1],
+                                            backref='matches_side_two_player_1')
+    side_two_player_2_rel = db.relationship('Player', foreign_keys=[side_two_player_2],
+                                            backref='matches_side_two_player_2')
 
     def __init__(self, date: str, side_one_player_1: int, side_two_player_1: int, tournament_id: int, event_id: int,
                  result_id: int = None, side_one_player_2: int = None, side_two_player_2: int = None) -> None:
