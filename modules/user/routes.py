@@ -1,5 +1,6 @@
 from flask import Blueprint, request, render_template, redirect, url_for
 from modules.user.login import *
+from modules.user.signup import user_signup
 
 user_app = Blueprint("user", __name__)
 
@@ -15,7 +16,6 @@ def signup():
 
 @user_app.route('/signin', methods=['GET', 'POST'])
 def signin():
-    success_status: bool
     success_status, msg = user_signin(request)
     if success_status:
         if session['user_id'] == 1:

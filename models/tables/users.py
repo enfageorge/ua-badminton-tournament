@@ -18,7 +18,7 @@ class Users(db.Model):
     player = db.relationship('Player', backref='users', lazy=True)
     #user_permission = db.relationship('UserPermission', backref='users', lazy=True)
 
-    def __init__(self, first_name, email, last_name=None):
+    def __init__(self, first_name, email, last_name,login_id):
         """
         Constructor for Users Table
         :param first_name: First name of the user
@@ -29,6 +29,7 @@ class Users(db.Model):
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
+        self.login_id = login_id
 
     def __repr__(self):
         return "<Users(first_name='%s', last_name='%s', email='%s')>" % \

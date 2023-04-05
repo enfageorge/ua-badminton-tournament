@@ -29,25 +29,4 @@ def user_signin(request):
     return False, ''
 
 
-def user_signup(request):
-    msg = ''
-    if request.method == 'POST' and 'username' in request.form and 'password' in request.form and \
-            'email' in request.form:
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
 
-        # Check if user already exists in db:
-        login_user = Login.query.get(username)
-        user_exists = Users.query.filter_by(email=email).first()
-        if login_user:
-            if user_exists:
-                if user_exists.email == email:  # username and email found in db
-                    msg = 'User exists, Try Logging in?'
-            else:  # Someone has that username already
-                msg = 'Sorry, that username is taken. Try another?'
-        elif user_exists:  # Username is incorrect, but the email exists in db
-            msg = 'User exists, Try Logging in?'
-        else:  # todo: Insert a new user
-            msg = 'You have successfully registered !'
-    return msg
