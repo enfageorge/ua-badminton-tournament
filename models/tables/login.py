@@ -1,4 +1,4 @@
-from database import db
+from app import db
 
 """
 Class Login stores Login information related to Users (Admin and Players)

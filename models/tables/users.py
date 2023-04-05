@@ -1,4 +1,4 @@
-from database import db
+from app import db
 
 """
 Class Users: Users consist of Admin and Players, this table stores information relation to users
@@ -16,19 +16,21 @@ class Users(db.Model):
     email = db.Column(db.String(30), unique=True, nullable=False)
     login_id = db.Column(db.String(50), db.ForeignKey('login.login_id'))
     player = db.relationship('Player', backref='users', lazy=True)
-    user_permission = db.relationship('UserPermission', backref='users', lazy=True)
 
-    def __init__(self, first_name, email, last_name=None):
+    # user_permission = db.relationship('UserPermission', backref='users', lazy=True)
+
+    def __init__(self, first_name, email, last_name, login_id):
         """
         Constructor for Users Table
         :param first_name: First name of the user
         :param last_name: Last name of the user
         :param email: Email of the user
-        :param user_id: User ID of the user
+        :param login_id: Users ID of the user
         """
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
+        self.login_id = login_id
 
     def __repr__(self):
         return "<Users(first_name='%s', last_name='%s', email='%s')>" % \
