@@ -13,7 +13,6 @@ class Permission(db.Model):
     delete = db.Column(db.Boolean, nullable=True)
     user_permission = db.relationship('UserPermission', backref='permission', lazy=True)
 
-
     def __init__(self, read: bool, write: bool, delete: bool):
         """
         Constructor for Permission Table

@@ -17,5 +17,5 @@ def player_dashboard():
 @user_login_required
 def update_player():
     if request.method == "POST":
-        update_status, msg = edit_player_details(request,session['user_id'])
+        update_status, msg = edit_player_details(request, session['user_id'])  # vars for later data validation
         return redirect('/dashboard')

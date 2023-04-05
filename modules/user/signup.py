@@ -34,13 +34,16 @@ def create_new_account(request):
     # Insert into Login
     db.session.add(Login(login_id=request.form['username'], password=request.form['password']))
     # Insert into user
-    db.session.add(Users(first_name=request.form['firstname'],email=request.form['email'],last_name=request.form['lastname'],login_id=request.form['username']))
+    db.session.add(
+        Users(first_name=request.form['firstname'], email=request.form['email'], last_name=request.form['lastname'],
+              login_id=request.form['username']))
     db.session.commit()
 
     # Insert into Accounts
     db.session.expire_all()
     player_id = Users.query.filter_by(email=request.form['email']).first().id
-    db.session.add(Player(player_id=player_id,social_media_consent=True,competing_gender=request.form['gender_optionsRadios']))
+    db.session.add(
+        Player(player_id=player_id, social_media_consent=True, competing_gender=request.form['gender_optionsRadios']))
     db.session.commit()
     db.session.expire_all()
 

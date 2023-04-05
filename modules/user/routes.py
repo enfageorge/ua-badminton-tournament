@@ -25,9 +25,9 @@ def signin():
     else:
         return render_template('user/login.html', msg=msg)
 
+
 @user_app.route('/logout', methods=['GET', 'POST'])
 def logout():
     session['user_id'] = 0
     session['logged_in'] = False
     return redirect('/signin')
-
