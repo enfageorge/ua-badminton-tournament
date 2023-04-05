@@ -9,7 +9,7 @@ class Login(db.Model):
     __tablename__ = "login"
     login_id = db.Column(db.String(50), primary_key=True)
     password = db.Column(db.String(20), nullable=False)
-    user = db.relationship('User', backref='login', lazy=True)
+    users = db.relationship('Users', backref='login', lazy=True)
 
     def __init__(self, login_id: str, password: str):
         self.login_id = login_id

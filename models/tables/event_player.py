@@ -1,7 +1,7 @@
 from database import db
 
 """
-Class representing the user-event interest table, with a many-to-many relationship between event & players.
+Class representing the player-event interest table, with a many-to-many relationship between event & players.
 An event can be played by many players, A player can play many events.
 This table stores what events the player is interested in playing.
 """

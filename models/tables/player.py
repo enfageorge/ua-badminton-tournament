@@ -8,7 +8,7 @@ Class Player, stores information relation to badminton players
 
 class Player(db.Model):
     __tablename__ = "player"
-    player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     seeding_score = db.Column(db.Integer, nullable=True)
     social_media_consent = db.Column(db.Boolean, nullable=False)
     competing_gender = db.Column(db.String(10), nullable=False)
@@ -23,7 +23,7 @@ class Player(db.Model):
                  phone_number: str, dob: str, club_name: str):
         """
         Constructor for Player Table
-        :param player_id: Primary for the Player Table, FK references User table
+        :param player_id: Primary for the Player Table, FK references Users table
         :param seeding_score: the seeding score based on which players are ranked
         :param social_media_consent: if True, player agrees for photography/videography
         :param competing_gender: Determines eligibility for playing in competing gender specific matches
