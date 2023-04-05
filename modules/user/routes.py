@@ -16,12 +16,12 @@ def signup():
 @user_app.route('/signin', methods=['GET', 'POST'])
 def signin():
     success_status: bool
-    success_status, msg, is_admin = user_signin(request)
+    success_status, msg = user_signin(request)
     if success_status:
-        if is_admin:
+        print(session['user_id'])
+        if session['user_id'] == 1:
             return redirect(url_for('admin.admin_dashboard'))
         else:
             return redirect(url_for('player.player_dashboard'))
-
     else:
         return render_template('user/login.html', msg=msg)

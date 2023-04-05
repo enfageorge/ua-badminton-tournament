@@ -16,26 +16,16 @@ def user_signin(request):
 
         if login_user:
             correct_password = login_user.password
-
-            if username == 'admin' and password == correct_password:
-                session['loggedin'] = True
-                session['username'] = login_user.login_id
-                return True, 'Logged in', True
-
-            elif password == correct_password:
-                account = {
-                    'id': 400,
-                    'username': 'player',
-                }
-                session['loggedin'] = True
-                session['id'] = account['id']
-                session['username'] = account['username']
-                return True, 'Logged in', False
+            if password == correct_password:
+                session['logged_in'] = True
+                user_obj = User.query.filter_by(login_id=username).first()
+                session['user_id'] = user_obj.id
+                return True, 'Logged in'
             elif password != correct_password:
-                return False, 'Incorrect username / password', False
+                return False, 'Incorrect username / password'
         else:
-            return False, 'No account found,check username or please sign up', False
-    return False, '', False
+            return False, 'No account found,check username or please sign up'
+    return False, ''
 
 
 def user_signup(request):
