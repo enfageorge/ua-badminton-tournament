@@ -8,16 +8,16 @@ Class Player, stores information relation to badminton players
 
 class Player(db.Model):
     __tablename__ = "player"
-    player_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+    player_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     seeding_score = db.Column(db.Integer, nullable=True)
     social_media_consent = db.Column(db.Boolean, nullable=False)
-    competing_gender = db.Column(db.String(10), nullable=False)
+    competing_gender = db.Column(db.String(10), nullable=True)
     phone_number = db.Column(db.String(10), nullable=True)
     dob = db.Column(db.Date, default=datetime.utcnow())
     club_name = db.Column(db.String(30), nullable=True)
-    matches = db.relationship('Match', backref='player', lazy=True)
-    event_player = db.relationship('EventPlayer', backref='player', lazy=True)
 
+    # matches = db.relationship('Match', backref='player', lazy=True)
+    # event_player = db.relationship('EventPlayer', backref='player', lazy=True)
 
     def __init__(self, player_id: int, seeding_score: int, social_media_consent: bool, competing_gender: str,
                  phone_number: str, dob: str, club_name: str):
@@ -42,4 +42,3 @@ class Player(db.Model):
     def __repr__(self):
         return "<Player(player_id='%s', competing_gender'%s')>" % (
             self.player_id, self.competing_gender)
-

@@ -18,7 +18,6 @@ def signin():
     success_status: bool
     success_status, msg = user_signin(request)
     if success_status:
-        print(session['user_id'])
         if session['user_id'] == 1:
             return redirect(url_for('admin.admin_dashboard'))
         else:

@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from app import db
 
 
@@ -8,13 +10,13 @@ class User(db.Model):
     Permissions for Admin and Players are stored in 'Permission' child class
     Login credentials for Admin and Players are stored in 'Login' class
     """
-    __tablename__ = "user"
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column(db.String(20), nullable=False)
     last_name = db.Column(db.String(20), nullable=True)
     email = db.Column(db.String(30), unique=True, nullable=False)
     login_id = db.Column(db.String(50), db.ForeignKey('login.login_id'))
-    #player = db.relationship('Player', backref='user', lazy=True)
+    player = db.relationship('Player', backref='user', lazy=True)
     #user_permission = db.relationship('UserPermission', backref='user', lazy=True)
 
     def __init__(self, first_name, email, last_name=None):
