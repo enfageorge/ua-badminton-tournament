@@ -12,7 +12,7 @@ from models.tables.permission import Permission
 from models.tables.player import Player
 from models.tables.result import Result
 from models.tables.tournament import Tournament
-from models.tables.user import User
+from models.tables.users import Users
 from models.tables.user_permission import UserPermission
 
 ''' App Config '''
