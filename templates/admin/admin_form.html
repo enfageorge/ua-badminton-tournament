@@ -1,66 +1,94 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-      <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <titleUA Badminton Tournament</title>
-	<!-- Bootstrap Styles-->
-    <link href="/static/bootstrap.css" rel="stylesheet" />
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>UA Badminton Tournament
+    </title>
+    <!-- Bootstrap Styles-->
+    <link href="/static/bootstrap.css" rel="stylesheet"/>
     <!-- FontAwesome Styles-->
-    <link href="/static/font-awesome.css" rel="stylesheet" />
-        <!-- Custom Styles-->
-    <link href="/static/adminCustomStyle.css" rel="stylesheet" />
-     <!-- Google Fonts-->
-   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+    <link href="/static/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom Styles-->
+    <link href="/static/adminCustomStyle.css" rel="stylesheet"/>
+    <!-- Google Fonts-->
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'/>
+    <script>
+        msg = "{{ msg }}";
+        var data = JSON.parse(msg.replace(/&quot;/g, '"').replace(/&#39;/g, '"').replace(/[\u0000-\u001F]+/g, ""));
+        console.log(data);
+
+        window.onload = function () {
+            const options = document.getElementById('events_checking').querySelectorAll("input[type='checkbox']");
+            console.log(data);
+            dataArr = data.events.split(",").map(item => item.trim());
+            console.log(dataArr);
+
+            // Iterate through each checkbox and get its value
+            for (let i = 0; i < options.length; i++) {
+                const checkbox = options[i];
+                const value = checkbox.value;
+                console.log(value);
+                if (dataArr.includes(value)) {
+                    console.log(" Selected");
+                    document.getElementById('events_checking').querySelectorAll("input[type='checkbox']")[i].checked = true;
+                }
+            }
+        }
+    </script>
 </head>
 <body>
-    <div id="wrapper">
-        <nav class="navbar navbar-default top-navbar" role="navigation">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href={{url_for('web.home')}}>UA Badminton Tournament</a>
-            </div>
-        </nav>
-        <!--/. NAV TOP  -->
-        <nav class="navbar-default navbar-side" role="navigation">
-            <div class="sidebar-collapse">
-                <ul class="nav" id="main-menu">
-                    <li>
-                        <a class="active-menu" href="{{url_for('admin.admin_dashboard')}}"><i class="fa fa-dashboard"></i> HOME</a>
-                    </li>
-                    <li>
-                        <a class="active-menu" href="{{url_for('admin.admin_form')}}"><i class="fa fa-edit"></i> Tournament</a>
-                    </li>
-                    <li>
-                        <a class="active-menu" href="{{url_for('admin.admin_events')}}"><i class="fa fa-desktop"></i> Events</a>
-                    </li>
-                    <li>
-                        <a class="active-menu" href="{{url_for('admin.admin_matches')}}"><i class="fa fa-table"></i> Matches</a>
-                    </li>
-                </ul>
+<div id="wrapper">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href={{ url_for('web.home') }}>UA Badminton Tournament</a>
+        </div>
+    </nav>
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a class="active-menu" href="{{ url_for('admin.admin_dashboard') }}"><i class="fa fa-dashboard"></i>
+                        HOME</a>
+                </li>
+                <li>
+                    <a class="active-menu" href="{{ url_for('admin.admin_form') }}"><i class="fa fa-edit"></i>
+                        Tournament</a>
+                </li>
+                <li>
+                    <a class="active-menu" href="{{ url_for('admin.admin_events') }}"><i class="fa fa-desktop"></i>
+                        Events</a>
+                </li>
+                <li>
+                    <a class="active-menu" href="{{ url_for('admin.admin_matches') }}"><i class="fa fa-table"></i>
+                        Matches</a>
+                </li>
+            </ul>
 
-            </div>
+        </div>
 
-        </nav>
-        <!-- /. NAV SIDE  -->
+    </nav>
+    <!-- /. NAV SIDE  -->
 
 
-        <div id="page-wrapper" >
-            <div id="page-inner">
-			 <div class="row">
-                    <div class="col-md-12">
-                        <h1 class="page-header">
-                            Tournament <small></small>
-                        </h1>
-                    </div>
+    <div id="page-wrapper">
+        <div id="page-inner">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="page-header">
+                        Tournament <small></small>
+                    </h1>
                 </div>
-                 <!-- /. ROW  -->
-              <div class="row">
+            </div>
+            <!-- /. ROW  -->
+            <div class="row">
                 <div class="col-lg-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
@@ -72,77 +100,82 @@
                                     <form role="form">
                                         <div class="form-group">
                                             <label>Name:</label>
-                                            <input class="form-control">
-                                            <p class="help-block"></p>
+                                            <input class="form-control" value="{{ msg.name }}">
                                         </div>
                                         <div class="form-group">
                                             <label>Location:</label>
-                                            <input class="form-control">
+                                            <textarea class="form-control"
+                                                      rows="3">{{ msg.venue }}&#13;&#10;{{ msg.location }}</textarea>
                                         </div>
                                         <form role="form">
                                             <h5><b>Date/Time:</b></h5>
                                             <div class="form-group">
                                                 <label>Registration Open:</label>
-                                                <input type="datetime-local" class="form-control">
+                                                <input type="datetime-local" class="form-control"
+                                                       value="{{ msg.registration_open }}">
                                             </div>
                                             <div class="form-group">
-                                                <label>Registration Closed:</label>
-                                                <input type="datetime-local" class="form-control">
+                                                <label>Registration Deadline:</label>
+                                                <input type="datetime-local" class="form-control"
+                                                       value="{{ msg.registration_deadline }}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Withdraw Deadline:</label>
-                                                <input type="datetime-local" class="form-control">
+                                                <input type="datetime-local" class="form-control"
+                                                       value="{{ msg.withdraw_deadline }}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Tournament Start Date:</label>
-                                                <input type="datetime-local" class="form-control">
+                                                <input type="datetime-local" class="form-control"
+                                                       value="{{ msg.tournament_start_date }}">
                                             </div>
                                             <div class="form-group">
                                                 <label>Tournament End Date:</label>
-                                                <input type="datetime-local" class="form-control">
+                                                <input type="datetime-local" class="form-control"
+                                                       value="{{ msg.tournament_end_date }}">
                                             </div>
                                         </form>
-                                        <div class="form-group">
+                                        <div class="form-group" id="events_checking">
                                             <label>Events:</label>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">Mens Single (MS)
+                                                    <input type="checkbox" value="MS">Mens Single (MS)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">Mens Double (MD)
+                                                    <input type="checkbox" value="MD">Mens Double (MD)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">Womens Single (WS)
+                                                    <input type="checkbox" value="WS">Womens Single (WS)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">Womens Double (WD)
+                                                    <input type="checkbox" value="WD">Womens Double (WD)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">Mix Doubles (XD)
+                                                    <input type="checkbox" value="XD">Mix Doubles (XD)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">Under 19 (U19)
+                                                    <input type="checkbox" value="U19">Under 19 (U19)
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="">Under 17 (U17)
+                                                    <input type="checkbox" value="U17">Under 17 (U17)
                                                 </label>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Regulations:</label>
-                                            <textarea class="form-control" rows="3"></textarea>
+                                            <textarea class="form-control" rows="3">{{ msg.Regulations }}</textarea>
                                         </div>
                                         <button type="submit" class="btn btn-default">Submit</button>
                                         <button type="reset" class="btn btn-default">Reset</button>
@@ -165,12 +198,8 @@
                                     <form role="form">
                                         <div class="form-group">
                                             <label>Enter news</label>
-                                            <input class="form-control">
-                                            <p class="help-block"></p>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Text area</label>
-                                            <textarea class="form-control" rows="3"></textarea>
+                                            <textarea class="form-control">{{ msg.announcements }}</textarea>
+                                            {#                                            <p class="help-block"></p>#}
                                         </div>
 
                                         <button type="submit" class="btn btn-default">Submit</button>
@@ -188,14 +217,14 @@
                 <!-- /.col-lg-12 -->
             </div>
 
-			</div>
-             <!-- /. PAGE INNER  -->
-            </div>
-         <!-- /. PAGE WRAPPER  -->
         </div>
-     <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
+        <!-- /. PAGE INNER  -->
+    </div>
+    <!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+<!-- JS Scripts-->
+<!-- jQuery Js -->
 <!--    <script src="assets/js/jquery-1.10.2.js"></script>-->
 <!--      &lt;!&ndash; Bootstrap Js &ndash;&gt;-->
 <!--    <script src="assets/js/bootstrap.min.js"></script>-->
