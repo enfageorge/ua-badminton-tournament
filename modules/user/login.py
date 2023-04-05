@@ -1,5 +1,5 @@
 from flask import session
-from models.tables import Login
+from models.tables import Login, User
 
 '''
 This file contains functions that manage player signin and signup
@@ -46,17 +46,17 @@ def user_signup(request):
         password = request.form['password']
         email = request.form['email']
 
-        # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        # cursor.execute('SELECT * FROM accounts WHERE username = % s', (username,))
-        # account = cursor.fetchone()
-
-        # if account:
-        if email == 'email0':
+        # Check if user already exists in db:
+        login_user = Login.query.get(username)
+        user_exists = User.query.filter_by(email=email).first()
+        if login_user:
+            if user_exists:
+                if user_exists.email == email:  # username and email found in db
+                    msg = 'User exists, Try Logging in?'
+            else:  # Someone has that username already
+                msg = 'Sorry, that username is taken. Try another?'
+        elif user_exists:  # Username is incorrect, but the email exists in db
             msg = 'User exists, Try Logging in?'
-        elif username == 'user0':
-            msg = 'Username already exists. Choose a different username'
-        else:
-            # cursor.execute('INSERT INTO User VALUES (NULL, % s, % s, % s)', (username, password, email,))
-            # mysql.connection.commit()
+        else:  # todo: Insert a new user
             msg = 'You have successfully registered !'
     return msg
