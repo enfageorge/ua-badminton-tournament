@@ -1,4 +1,6 @@
 from flask import session
+from models.tables import Login
+
 '''
 This file contains functions that manage player signin and signup
 '''
@@ -9,31 +11,30 @@ def user_signin(request):
         username = request.form['username']
         password = request.form['password']
 
-        # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-        # cursor.execute('SELECT * FROM accounts WHERE username = % s AND password = % s', (username, password,))
-        # account = cursor.fetchone()
+        # Get user from db
+        login_user = Login.query.get(username)
 
-        if username == 'admin' and password == 'pwd':
-            account = {
-                'id': 100,
-                'username': 'admin',
-            }
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
+        if login_user:
+            correct_password = login_user.password
 
-            return True, 'Logged in', True
-        elif username == 'player' and password == 'pwd':
-            account = {
-                'id': 400,
-                'username': 'player',
-            }
-            session['loggedin'] = True
-            session['id'] = account['id']
-            session['username'] = account['username']
-            return True, 'Logged in', False
+            if username == 'admin' and password == correct_password:
+                session['loggedin'] = True
+                session['username'] = login_user.login_id
+                return True, 'Logged in', True
+
+            elif password == correct_password:
+                account = {
+                    'id': 400,
+                    'username': 'player',
+                }
+                session['loggedin'] = True
+                session['id'] = account['id']
+                session['username'] = account['username']
+                return True, 'Logged in', False
+            elif password != correct_password:
+                return False, 'Incorrect username / password', False
         else:
-            return False, 'Incorrect username / password', False
+            return False, 'No account found,check username or please sign up', False
     return False, '', False
 
 
