@@ -1,4 +1,4 @@
-from app import db
+from database import db
 
 """
 Class Permission: Stores rwx permissions for Admins and Players
@@ -14,14 +14,13 @@ class Permission(db.Model):
     user_permission = db.relationship('UserPermission', backref='permission', lazy=True)
 
 
-    def __init__(self, read: bool, write: bool, delete: bool, user_id=None):
+    def __init__(self, read: bool, write: bool, delete: bool):
         """
         Constructor for Permission Table
         :param id: Primary Key for the Permission Table
         :param read: Data read permission
         :param write: Data write permission
         :param delete: Data delete permission
-        :param user_id: Foreign Key for User Table
         """
         self.read = read
         self.write = write

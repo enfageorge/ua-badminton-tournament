@@ -1,20 +1,31 @@
 from flask import *
-# from flask_sqlalchemy import SQLAlchemy
-
+from database import db
 from modules.web.routes import web_app
 from modules.user.routes import user_app
 from modules.admin.routes import admin_app
 from modules.player.routes import player_app
+from models.tables.event import Event
+from models.tables.login import Login
+from models.tables.match import Match
+from models.tables.event_player import EventPlayer
+from models.tables.permission import Permission
+from models.tables.player import Player
+from models.tables.result import Result
+from models.tables.tournament import Tournament
+from models.tables.users import Users
+from models.tables.user_permission import UserPermission
 
 ''' App Config '''
 app = Flask(__name__)
 app.secret_key = 'csc536'
 
 '''Database setup'''
-
-# app.config['SQLALCHEMY_DATABASE_URI'] = 'PLACEHOLDER'  # TBA
-# app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-# db = SQLAlchemy(app)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:uabadmintontournamentadmin@uabadmintontournament' \
+                                        '.cw5ilorod8lo.us-east-2.rds.amazonaws.com:5432/uabadmintontournamentdb'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
+with app.app_context():
+    db.create_all()
 
 '''Route management'''
 
