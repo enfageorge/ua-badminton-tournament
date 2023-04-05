@@ -109,7 +109,7 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Email:</label>
-                                            <input class="form-control" id="email" name="email" type="text" placeholder="Enter your email" value={{msg.email}}>
+                                            <input class="form-control" id="email" name="email" type="email" placeholder="Enter your email" value={{msg.email}}>
                                         </div>
                                         <div class="form-group">
                                             <label>Phone number:</label>
@@ -117,25 +117,11 @@
                                         </div>
                                         <div class="form-group">
                                             <label>Gender:</label>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="gender_optionsRadios" id="optionsRadios1" value="m" checked="">Male
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="gender_optionsRadios" id="optionsRadios2" value="f">Female
-                                                </label>
-                                            </div>
-                                            <div class="radio">
-                                                <label>
-                                                    <input type="radio" name="gender_optionsRadios" id="optionsRadios3" value="o">Others
-                                                </label>
-                                            </div>
+                                            <div class="msg">{{ msg.competing_gender }}</div>
                                         </div>
                                         <div class="form-group">
                                             <label>Date of Birth:</label>
-                                            <input class="form-control" id="dob" name="dob" type="text"placeholder="Enter your DOB" value={{msg.dob}}>
+                                            <input class="form-control" id="dob" name="dob" type="date" placeholder="Enter your DOB" value={{msg.dob}}>
                                         </div>
                                         <div class="form-group">
                                             <label>Club Name:</label>
