@@ -15,9 +15,10 @@ class Tournament(db.Model):
     registration_closed = db.Column(db.Date, default=datetime.utcnow())
     tournament_start_date = db.Column(db.Date, default=datetime.utcnow())
     tournament_end_date = db.Column(db.Date, default=datetime.utcnow())
+    announcement = db.Column(db.String(400), nullable=True)
 
     def __init__(self, tournament_name: str, location: str, registration_open: str, registration_closed: str,
-                 tournament_start_date: str, tournament_end_date: str) -> None:
+                 tournament_start_date: str, tournament_end_date: str, announcement: str = "") -> None:
         """
         Initialize a Tournament object with the given attributes.
         tournament_name: The name of the tournament.
@@ -26,6 +27,7 @@ class Tournament(db.Model):
         registration_closed: The date (in MM-DD-YYYY format) when registration closes for the tournament.
         tournament_start_date: The date (in MM-DD-YYYY format) when the tournament starts.
         tournament_end_date: The date (in MM-DD-YYYY format) when the tournament ends.
+        announcement: announcement related to the tournament
         """
         # check if it has id cos player is using id.
         self.tournament_name = tournament_name
@@ -34,6 +36,7 @@ class Tournament(db.Model):
         self.registration_closed = registration_closed
         self.tournament_start_date = tournament_start_date
         self.tournament_end_date = tournament_end_date
+        self.announcement = announcement
         matches = db.relationship("Match", backref="tournament", lazy=True)
 
     def __repr__(self) -> str:
