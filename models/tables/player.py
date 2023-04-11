@@ -8,7 +8,6 @@ Class Player, stores information relation to badminton players
 class Player(db.Model):
     __tablename__ = "player"
     player_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
-    seeding_score = db.Column(db.Integer, nullable=True)
     social_media_consent = db.Column(db.Boolean, nullable=False)
     competing_gender = db.Column(db.String(10), nullable=False)
     phone_number = db.Column(db.String(10), nullable=True)
@@ -16,13 +15,11 @@ class Player(db.Model):
     club_name = db.Column(db.String(30), nullable=True)
     #event_player = db.relationship('EventPlayer', backref='player', lazy=True)
 
-    def __init__(self, player_id: int, competing_gender: str, seeding_score: int = None,
-                 social_media_consent: bool = True,
+    def __init__(self, player_id: int, competing_gender: str, social_media_consent: bool = True,
                  phone_number: str = None, dob: str = None, club_name: str = None):
         """
         Constructor for Player Table
         :param player_id: Primary for the Player Table, FK references Users table
-        :param seeding_score: the seeding score based on which players are ranked
         :param social_media_consent: if True, player agrees for photography/videography
         :param competing_gender: Determines eligibility for playing in competing gender-specific matches
         :param phone_number: contact number
@@ -30,7 +27,6 @@ class Player(db.Model):
         :param club_name: the name of the club player belongs to
         """
         self.player_id = player_id
-        self.seeding_score = seeding_score
         self.social_media_consent = social_media_consent
         self.competing_gender = competing_gender
         self.phone_number = phone_number
