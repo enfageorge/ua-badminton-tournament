@@ -2,6 +2,7 @@ from app import db
 
 from models.tables.login import Login
 from models.tables.player import Player
+from models.tables.user_permission import UserPermission
 from models.tables.users import Users
 
 
@@ -44,7 +45,10 @@ def create_new_account(request):
     player_id = Users.query.filter_by(email=request.form['email']).first().id
     db.session.add(
         Player(player_id=player_id, social_media_consent=True, competing_gender=request.form['gender_optionsRadios']))
+    db.session.add(
+        UserPermission(user_id=player_id, permission_id=2))
     db.session.commit()
+
     db.session.expire_all()
 
     return True

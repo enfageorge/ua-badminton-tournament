@@ -5,10 +5,10 @@ def get_player_details(username):
     player_roaster = [
         {
             'id': 1,
-             'username': 'John15482',
-             'first_name': 'John',
-             'last_name': 'Doe',
-             'email': '	name@site.com'
+            'username': 'John15482',
+            'first_name': 'John',
+            'last_name': 'Doe',
+            'email': '	name@site.com'
         },
         {
             'id': 2,
