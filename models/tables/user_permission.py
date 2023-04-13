@@ -9,6 +9,7 @@ class UserPermission(db.Model):
     __tablename__ = "user_permission"
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), primary_key=True)
     permission_id = db.Column(db.Integer, db.ForeignKey('permission.id'), primary_key=True)
+    users = db.relationship('Users', backref='user_permissions', lazy=True)  # Relationship with User Table
 
     def __init__(self, user_id, permission_id):
         """
