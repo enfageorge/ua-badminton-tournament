@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request
 
-from modules.admin.dashboard_home import get_player_details
+from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_tournament import get_tournament_details
 from modules.admin.dashboard_events import get_event_details
 from modules.admin.dashboard_matches import get_matches_details
@@ -13,7 +13,7 @@ admin_app = Blueprint("admin", __name__)
 @admin_app.route('/admin', methods=['GET', 'POST'])
 @admin_login_required
 def admin_dashboard():
-    player_details = get_player_details('username')
+    player_details = get_player_roaster()
     return render_template('admin/admin_dashboard.html', msg = player_details)
 
 
