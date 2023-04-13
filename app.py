@@ -1,7 +1,7 @@
 from flask import *
 from flask_migrate import Migrate
 
-from models.models import db
+from models.models import *
 from modules.web.routes import web_app
 from modules.user.routes import user_app
 from modules.admin.routes import admin_app
@@ -18,10 +18,13 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://postgres:uabadmintontourna
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 '''Route management'''
 
+
 app.register_blueprint(web_app)
 app.register_blueprint(user_app)
 app.register_blueprint(admin_app)
 app.register_blueprint(player_app)
 
 db.init_app(app)
+with app.app_context():
+    db.create_all()
 migrate = Migrate(app, db)

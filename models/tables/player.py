@@ -13,7 +13,7 @@ class Player(db.Model):
     phone_number = db.Column(db.String(10), nullable=True)
     dob = db.Column(db.Date, nullable=True)
     club_name = db.Column(db.String(30), nullable=True)
-    #event_player = db.relationship('EventPlayer', backref='player', lazy=True)
+    # event_player = db.relationship('EventPlayer', backref='player', lazy=True)
 
     def __init__(self, player_id: int, competing_gender: str, social_media_consent: bool = True,
                  phone_number: str = None, dob: str = None, club_name: str = None):
