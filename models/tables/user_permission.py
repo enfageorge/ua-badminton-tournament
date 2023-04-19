@@ -1,4 +1,6 @@
-from app import db
+from models.models import db
+# noinspection PyUnresolvedReferences
+from models.tables.permission import Permission  # do not delete
 
 """
 Class User Permission stores Permission ID corresponding to User ID, This table forms a composite key between the two.
@@ -21,4 +23,3 @@ class UserPermission(db.Model):
 
     def __repr__(self):
         return f"<UserPermission(user_id='{self.user_id}', permission_id='{self.permission_id}')>"
-
