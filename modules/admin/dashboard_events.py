@@ -1,4 +1,4 @@
-def get_event_details(username):
+def get_event_details():
     # cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
     # cursor.execute('SELECT * FROM accounts WHERE username = username)
     # account = cursor.fetchone()
