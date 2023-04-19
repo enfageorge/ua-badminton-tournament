@@ -12,7 +12,9 @@ class Event(db.Model):
     gender_allowed = db.Column(db.String(10), nullable=True)
     max_participants_allowed = db.Column(db.Integer, nullable=True)
     matches = db.relationship("Match", backref="event", lazy=True)
-    event_player = db.relationship('EventPlayer', backref='event', lazy=True)
+    players_event_seeds = db.relationship('PlayersEventSeed', backref='event', lazy=True)
+    # establishing the relationship in the Event class creates a connection between PlayersEventSeed and Event table
+    # that can be used later when the PlayersEventSeed rows are added.
 
     def __init__(self, event_name: str, gender_allowed: str = None, max_participants_allowed: int = None) -> None:
         """
