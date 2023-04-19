@@ -11,7 +11,7 @@ class Permission(db.Model):
     read = db.Column(db.Boolean, nullable=False)
     write = db.Column(db.Boolean, nullable=False)
     delete = db.Column(db.Boolean, nullable=True)
-    #user_permission = db.relationship('UserPermission', backref='permission', lazy=True)
+    user_permission = db.relationship('UserPermission', backref='permission', lazy=True)
 
     def __init__(self, read: bool, write: bool, delete: bool):
         """
