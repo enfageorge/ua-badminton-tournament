@@ -1,4 +1,4 @@
-from models.tables.permission import Permission
+from models.models import Permission
 import pytest
 from app import app, db
 

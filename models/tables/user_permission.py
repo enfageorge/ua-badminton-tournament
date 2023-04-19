@@ -1,6 +1,6 @@
-from models.models import db
+from models.database import db
 # noinspection PyUnresolvedReferences
-from models.tables.permission import Permission  # do not delete
+from models.models import Permission  # do not delete
 
 """
 Class User Permission stores Permission ID corresponding to User ID, This table forms a composite key between the two.

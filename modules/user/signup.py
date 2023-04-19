@@ -1,9 +1,9 @@
 from app import db
 
-from models.tables.login import Login
-from models.tables.player import Player
-from models.tables.user_permission import UserPermission
-from models.tables.users import Users
+from models.models import Login
+from models.models import Player
+from models.models import UserPermission
+from models.models import Users
 
 
 def user_signup(request):
