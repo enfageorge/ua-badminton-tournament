@@ -1,4 +1,4 @@
-def get_tournament_details(username, request):
+def get_tournament_details(request):
     if request.method == 'POST':
         # INSERT to Tournament table
         if 'name' in request.form:

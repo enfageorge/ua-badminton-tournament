@@ -21,5 +21,5 @@ def get_player_roaster():
                 'email': user.email
             })
             s_no += 1
-
+            
     return player_roaster

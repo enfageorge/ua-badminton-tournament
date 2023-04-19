@@ -1,11 +1,13 @@
-from models.tables.permission import Permission
+from models.models import Permission
 import pytest
 from app import app, db
+
 
 @pytest.fixture(scope='module')
 def perm():
     perm = Permission(True, True, True)
     return perm
+
 
 def test_add_user_to_database(perm):
     with app.app_context():

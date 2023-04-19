@@ -48,7 +48,7 @@ class Match(db.Model):
         self.event_id = event_id
         self.result_id = result_id
 
-        def __repr__(self):
+        def __repr__():
             return f"<Match(match_id={self.match_id}, date={self.date}, side_one_player_1={self.side_one_player_1}," \
                    f" side_one_player_2={self.side_one_player_2}, side_two_player_1={self.side_two_player_1}," \
                    f" side_two_player_2={self.side_two_player_2}, tournament_id={self.tournament_id}," \

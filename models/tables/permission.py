@@ -11,12 +11,11 @@ class Permission(db.Model):
     read = db.Column(db.Boolean, nullable=False)
     write = db.Column(db.Boolean, nullable=False)
     delete = db.Column(db.Boolean, nullable=True)
-    #user_permission = db.relationship('UserPermission', backref='permission', lazy=True)
+    user_permission = db.relationship('UserPermission', backref='permission', lazy=True)
 
     def __init__(self, read: bool, write: bool, delete: bool):
         """
         Constructor for Permission Table
-        :param id: Primary Key for the Permission Table
         :param read: Data read permission
         :param write: Data write permission
         :param delete: Data delete permission
