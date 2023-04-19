@@ -1,7 +1,7 @@
 from flask import *
 from flask_migrate import Migrate
 
-from models.models import *
+from models.database import db
 from modules.web.routes import web_app
 from modules.user.routes import user_app
 from modules.admin.routes import admin_app
