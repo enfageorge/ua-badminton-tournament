@@ -1,4 +1,4 @@
-from models.models import db
+from app import db
 from models.tables.users import Users
 from models.tables.players_event_seed import PlayersEventSeed
 
