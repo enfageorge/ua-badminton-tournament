@@ -1,8 +1,7 @@
 from flask import session
 
-from models.models import db
-from models.tables.users import Users
-from models.tables.player import Player
+from models.database import db
+from models.models import Users, Player
 
 
 def get_player_details(user_id):
