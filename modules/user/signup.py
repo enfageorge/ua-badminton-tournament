@@ -34,19 +34,20 @@ def user_signup(request):
 def create_new_account(request):
     # Insert into Login
     db.session.add(Login(login_id=request.form['username'], password=request.form['password']))
+
     # Insert into user
     db.session.add(
         Users(first_name=request.form['firstname'], email=request.form['email'], last_name=request.form['lastname'],
               login_id=request.form['username']))
     db.session.commit()
 
-    # Insert into Accounts
+    # Insert into UserPermission
     db.session.expire_all()
-    player_id = Users.query.filter_by(email=request.form['email']).first().id
+    user_table_id = Users.query.filter_by(email=request.form['email']).first().id
     db.session.add(
-        Player(player_id=player_id, social_media_consent=True, competing_gender=request.form['gender_optionsRadios']))
+        Player(player_id=user_table_id, social_media_consent=True, competing_gender=request.form['gender_optionsRadios'].upper()))
     db.session.add(
-        UserPermission(user_id=player_id, permission_id=2))
+        UserPermission(user_id=user_table_id, permission_id=2))
     db.session.commit()
 
     db.session.expire_all()
