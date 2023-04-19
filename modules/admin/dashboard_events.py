@@ -3,7 +3,7 @@ from models.tables.users import Users
 from models.tables.players_event_seed import PlayersEventSeed
 
 
-def get_event_details(username):
+def get_event_details():
     db.session.expire_all()
     players_event_seed_ids = PlayersEventSeed.query.all()
     # eventids = Event.query.all()
