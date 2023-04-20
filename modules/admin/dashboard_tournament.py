@@ -76,7 +76,6 @@ def post_tournament_details(request):
             tournament_end_date = request.form['tournament_end_date']
         if 'announcements' in request.form:
             announcements = request.form['announcements']
-        if 'events' in request.form:
         # Create a new Tournament object with the details
         new_tournament = Tournament(tournament_name, location, registration_open, registration_closed,
                                     tournament_start_date, tournament_end_date, announcements)
