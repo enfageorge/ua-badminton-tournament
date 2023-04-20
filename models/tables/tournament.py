@@ -43,4 +43,5 @@ class Tournament(db.Model):
         """Return a string representation of the Tournament object."""
         return f"<Tournament Tournament Name={self.tournament_name}, Location={self.location}, " \
                f"Registration Open Date={self.registration_open} - Registration Open Date={self.registration_closed}," \
-               f"Tournament Start Date={self.tournament_start_date} - Tournament End Date={self.tournament_end_date}>"
+               f"Tournament Start Date={self.tournament_start_date} - Tournament End Date={self.tournament_end_date}, " \
+               f"Announcements={self.announcement}>"
