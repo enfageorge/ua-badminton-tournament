@@ -1,5 +1,7 @@
 from flask import Blueprint, render_template
 
+from modules.admin.dashboard_home import get_player_roaster
+
 web_app = Blueprint("web", __name__)
 
 
@@ -14,8 +16,9 @@ def tournament():
 
 
 @web_app.route('/players')
-def players():
-    return render_template('web/players.html')
+def public_view_players():
+    player_details = get_player_roaster()
+    return render_template('web/players.html', msg=player_details)
 
 
 @web_app.route('/events')
