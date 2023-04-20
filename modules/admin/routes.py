@@ -1,7 +1,7 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, redirect, session
 
 from modules.admin.dashboard_home import get_player_details
-from modules.admin.dashboard_tournament import get_tournament_details
+from modules.admin.dashboard_tournament import get_tournament_details, post_tournament_details
 from modules.admin.dashboard_events import get_event_details
 from modules.admin.dashboard_matches import get_matches_details
 
@@ -17,11 +17,18 @@ def admin_dashboard():
     return render_template('admin/admin_dashboard.html', msg=player_details)
 
 
-@admin_app.route('/admin/tournament', methods=['GET', 'POST'])
+@admin_app.route('/admin/tournament', methods=['GET'])
 @admin_login_required
 def admin_form():
-    tournament_details = get_tournament_details('username', request)
+    tournament_details = get_tournament_details(request)
     return render_template('admin/admin_form.html', msg=tournament_details)
+
+@admin_app.route('/admin/tournament_creation', methods=['POST'])
+@admin_login_required
+def admin_tournament_creation():
+    if request.method == "POST":
+        tournament_details = post_tournament_details(request)
+        return render_template('admin/admin_form.html', msg=tournament_details)
 
 
 @admin_app.route('/admin/events', methods=['GET', 'POST'])
