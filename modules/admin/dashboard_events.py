@@ -13,7 +13,7 @@ def assign_seeding(request):
     u19_events_details = []
     u17_events_details = []
 
-    print(request.document)
+    print(request.form)
 
     return {"ms_events_details": ms_events_details,
             "ws_events_details": ws_events_details,
@@ -39,7 +39,6 @@ def get_event_details():
 
     for event in all_events:
         if event.event_name == 'MS':
-            print("there is MS")
             ms_no = 1
             for reg_entry in all_registrations:
                 if reg_entry.event_id == event.event_id:
@@ -51,7 +50,6 @@ def get_event_details():
                     })
                     ms_no += 1
         elif event.event_name == 'WS':
-            print("there is WS")
             ws_no = 1
             for reg_entry in all_registrations:
                 if reg_entry.event_id == event.event_id:
@@ -63,7 +61,6 @@ def get_event_details():
                     })
                     ws_no += 1
         elif event.event_name == 'MD':
-            print("there is MD")
             md_no = 1
             for reg_entry in all_registrations:
                 if reg_entry.event_id == event.event_id:
@@ -77,7 +74,6 @@ def get_event_details():
                     })
                     md_no += 1
         elif event.event_name == 'WD':
-            print("there is WD")
             wd_no = 1
             for reg_entry in all_registrations:
                 if reg_entry.event_id == event.event_id:
@@ -91,7 +87,6 @@ def get_event_details():
                     })
                     wd_no += 1
         elif event.event_name == 'XD':
-            print("there is XD")
             xd_no = 1
             for reg_entry in all_registrations:
                 if reg_entry.event_id == event.event_id:
@@ -105,7 +100,6 @@ def get_event_details():
                     })
                     xd_no += 1
         elif event.event_name == 'U19':
-            print("there is U19")
             u19_no = 1
             for reg_entry in all_registrations:
                 if reg_entry.event_id == event.event_id:
@@ -117,7 +111,6 @@ def get_event_details():
                     })
                     u19_no += 1
         elif event.event_name == 'U17':
-            print("there is U17")
             u17_no = 1
             for reg_entry in all_registrations:
                 if reg_entry.event_id == event.event_id:

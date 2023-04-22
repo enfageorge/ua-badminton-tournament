@@ -20,11 +20,11 @@ def admin_dashboard():
 @admin_app.route('/admin/tournament', methods=['GET', 'POST'])
 @admin_login_required
 def admin_form():
-    tournament_details = get_tournament_details('username', request)
+    tournament_details = get_tournament_details(request)
     return render_template('admin/admin_form.html', msg=tournament_details)
 
 
-@admin_app.route('/admin/events', methods=['GET', 'POST'])
+@admin_app.route('/admin/events', methods=['GET'])
 @admin_login_required
 def admin_events():
     event_details = get_event_details()
@@ -35,7 +35,8 @@ def admin_events():
 @admin_login_required
 def enter_seed():
     if request.method == "POST":
-        event_details = assign_seeding(request)
+        seed_updated = assign_seeding(request)
+        event_details = get_event_details()
         return render_template('admin/admin_events.html', msg=event_details)
 
 
@@ -43,6 +44,6 @@ def enter_seed():
 @admin_login_required
 def admin_matches():
     print("Hello")
-    match_details = get_matches_details('username')
+    match_details = get_matches_details()
     print(match_details)
     return render_template('admin/admin_matches.html', msg=match_details)
