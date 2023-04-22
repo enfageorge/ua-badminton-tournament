@@ -35,7 +35,5 @@ def admin_events():
 @admin_app.route('/admin/matches')
 @admin_login_required
 def admin_matches():
-    print("Hello")
     match_details = get_matches_details()
-    print(match_details)
     return render_template('admin/admin_matches.html', msg=match_details)
