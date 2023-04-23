@@ -12,7 +12,10 @@ class Result(db.Model):
     result_score = db.Column(db.String(30), nullable=True)
     winner_player_1 = db.Column(db.Integer, db.ForeignKey('player.player_id'), nullable=False)
     winner_player_2 = db.Column(db.Integer, db.ForeignKey('player.player_id'), nullable=True)
-    players = db.relationship("Player", backref="results", lazy=True)
+    players = db.relationship("Player",
+                              foreign_keys=[winner_player_1, winner_player_2],
+                              backref="results",
+                              lazy=True)
     matches = db.relationship("Match", backref="result", lazy=True)
 
     def __init__(self, result_name: str = None, result_score: str = None, winner_player_1: int = None,
