@@ -25,6 +25,7 @@
             const formGroup = document.createElement('div');
             formGroup.classList.add('form-group');
             const select = document.createElement('select');
+            select.name = "match_status";
             select.classList.add('form-control');
             let options = [];
             if(Array.isArray(data)){
@@ -50,8 +51,9 @@
             const tableDataDiv = document.createElement('div');
             tableDataDiv.classList.add('form-group');
             const input = document.createElement('input');
+            input.name = "score";
             input.classList.add('form-control');
-            input.setAttribute("placeholder", "Enter Score")
+            input.setAttribute("placeholder", "Enter Score");
             input.value = data;
             tableDataDiv.append(input);
             return tableDataDiv;
@@ -166,38 +168,39 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            In-Progress Matches
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Court No.</th>
-                                        <th>Match-up</th>
-                                        <th>Event</th>
-                                        <th>Score</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="In-ProgressMatches">
-                                    </tbody>
-                                </table>
-
+            <form role="form" action="{{url_for('admin.update_matches')}}" method="post">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                In-Progress Matches
                             </div>
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                        <tr>
+                                            <th>Match No.</th>
+                                            <th>Court No.</th>
+                                            <th>Match-up</th>
+                                            <th>Event</th>
+                                            <th>Score</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="In-ProgressMatches">
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <button type="submit" class="btn btn-default">Save</button>
+                            </div>
                         </div>
+                        <!--End Advanced Tables -->
                     </div>
-                    <!--End Advanced Tables -->
                 </div>
-            </div>
+            </form>
             <!-- /. ROW  -->
             <div class="row">
                 <div class="col-md-12">
@@ -211,7 +214,7 @@
                                 <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                     <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>Match No.</th>
                                         <th>Match-up</th>
                                         <th>Event</th>
                                         <th>Score</th>

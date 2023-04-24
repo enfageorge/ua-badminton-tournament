@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, request
 from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_tournament import get_tournament_details
 from modules.admin.dashboard_events import get_event_details
-from modules.admin.dashboard_matches import get_matches_details
+from modules.admin.dashboard_matches import get_matches_details, set_matches_details
 
 from modules.decoraters import admin_login_required
 
@@ -32,10 +32,18 @@ def admin_events():
     return render_template('admin/admin_events.html', msg=event_details)
 
 
-@admin_app.route('/admin/matches')
+@admin_app.route('/admin/matches', methods=['GET', 'POST'])
 @admin_login_required
 def admin_matches():
     print("Hello")
     match_details = get_matches_details()
     print(match_details)
     return render_template('admin/admin_matches.html', msg=match_details)
+
+@admin_app.route('/admin/update_matches', methods=['POST'])
+def update_matches():
+    print("Hello, I am inside admin_matches")
+    if request.method == "POST":
+        match_details = get_matches_details()
+        match_updated_details = set_matches_details(request, match_details)
+        return render_template('admin/admin_matches.html', msg=match_updated_details)
