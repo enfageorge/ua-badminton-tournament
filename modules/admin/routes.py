@@ -2,8 +2,13 @@ from flask import Blueprint, render_template, request
 
 from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_tournament import get_tournament_details
+<<<<<<< HEAD
 from modules.admin.dashboard_events import get_event_details
 from modules.admin.dashboard_matches import get_matches_details, set_matches_details
+=======
+from modules.admin.dashboard_events import get_event_details, assign_seeding
+from modules.admin.dashboard_matches import get_matches_details
+>>>>>>> main
 
 from modules.decoraters import admin_login_required
 
@@ -17,7 +22,6 @@ def admin_dashboard():
     return render_template('admin/admin_dashboard.html', msg = player_details)
 
 
-
 @admin_app.route('/admin/tournament', methods=['GET', 'POST'])
 @admin_login_required
 def admin_form():
@@ -25,12 +29,19 @@ def admin_form():
     return render_template('admin/admin_form.html', msg=tournament_details)
 
 
-@admin_app.route('/admin/events', methods=['GET', 'POST'])
+@admin_app.route('/admin/events', methods=['GET'])
 @admin_login_required
 def admin_events():
     event_details = get_event_details()
     return render_template('admin/admin_events.html', msg=event_details)
 
+@admin_app.route('/admin/enter_seed', methods=['POST'])
+@admin_login_required
+def enter_seed():
+    if request.method == "POST":
+        event_details = get_event_details()
+        seed_updated_details = assign_seeding(request, event_details)
+        return render_template('admin/admin_events.html', msg=seed_updated_details)
 
 @admin_app.route('/admin/matches', methods=['GET', 'POST'])
 @admin_login_required

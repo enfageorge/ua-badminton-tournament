@@ -16,6 +16,69 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
     <link href="static/dataTables.bootstrap.css" rel="stylesheet" />
+    <script>
+        window.onload = function () {
+            msg = "{{ msg }}";
+            var data = JSON.parse(msg.replace(/&quot;/g, '"').replace(/&#39;/g, '"').replace(/[\u0000-\u001F]+/g, ""));
+            console.log("Data in html: ", data);
+            for (var i = 0; i < data["finished_matches"].length; i++) {
+                match = data["finished_matches"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.match_up;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.event;
+                const tableData4 = document.createElement('td');
+                tableData4.textContent = match.score;
+                const tableData5 = document.createElement('td');
+                tableData5.textContent = match.winner;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                tableRow.appendChild(tableData4);
+                tableRow.appendChild(tableData5);
+                document.getElementById('Finished_Matches').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["in_progress_matches"].length; i++) {
+                match = data["in_progress_matches"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.court_no;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.match_up;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.event;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                document.getElementById('In-ProgressMatches').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["upcoming_matches"].length; i++) {
+                match = data["upcoming_matches"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.match_up;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.event;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                document.getElementById('Upcoming_Matches').appendChild(tableRow);
+            }
+        }
+    </script>
 </head>
 <body>
     <div id="wrapper-public">
@@ -27,7 +90,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home.html">UA Badminton Tournament</a>
+                <a class="navbar-brand" href="{{url_for('web.home')}}">UA Badminton Tournament</a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
@@ -92,60 +155,8 @@
                                                 <th>Event</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>1</td>
-                                                <td>Ryan/Tina - Jon/Brittney</td>
-                                                <td>XD</td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>2</td>
-                                                <td>Michelle - Helen
-                                                </td>
-                                                <td>WS</td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>3</td>
-                                                <td>Empty
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>4</td>
-                                                <td>Empty
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>5</td>
-                                                <td>Empty
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>6</td>
-                                                <td>Empty
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>7</td>
-                                                <td>Empty
-                                                </td>
-                                                <td></td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>8</td>
-                                                <td>Frank - Jimmy
-                                                </td>
-                                                <td>MS</td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>9</td>
-                                                <td>Empty
-                                                </td>
-                                                <td></td>
-                                            </tr>
+                                        <tbody id="In-ProgressMatches">
+
                                         </tbody>
                                     </table>
 
@@ -170,18 +181,8 @@
                                                 <th>Event</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>1</td>
-                                                <td>Ryan/Tina - Jon/Brittney</td>
-                                                <td>XD</td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>2</td>
-                                                <td>Michelle - Helen
-                                                </td>
-                                                <td>WS</td>
-                                            </tr>
+                                        <tbody id="Upcoming_Matches">
+
                                         </tbody>
                                     </table>
 
@@ -211,49 +212,8 @@
                                                 <th>Winner</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>1</td>
-                                                <td>Christine - Caleigh</td>
-                                                <td>
-                                                   WS
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-<!--                                                        <label>Text Input with Placeholder</label>-->
-                                                        <input class="form-control" placeholder="Enter Score" value="21-18">
-                                                    </div>
-                                                </td>
-                                                <td class="center">
-                                                    <div class="form-group">
-                                                        <select class="form-control">
-                                                            <option selected>Christine</option>
-                                                            <option>Caleigh</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>2</td>
-                                                <td>Jon/Ryan - Neil/Joey</td>
-                                                <td>
-                                                    MD
-                                                </td>
-                                                <td>
-                                                    <div class="form-group">
-<!--                                                        <label>Text Input with Placeholder</label>-->
-                                                        <input class="form-control" placeholder="Enter Score" value="19 - 21">
-                                                    </div>
-                                                </td>
-                                                <td class="center">
-                                                    <div class="form-group">
-                                                        <select class="form-control">
-                                                            <option>Jon/Ryan</option>
-                                                            <option selected>Neil/Joey</option>
-                                                        </select>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                        <tbody id="Finished_Matches">
+
                                         </tbody>
                                     </table>
                                 </div>
