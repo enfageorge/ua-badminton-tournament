@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template
 
 from modules.admin.dashboard_home import get_player_roaster
+from modules.admin.dashboard_events import get_event_details
+from modules.admin.dashboard_matches import get_public_matches_details
 
 web_app = Blueprint("web", __name__)
 
@@ -23,7 +25,8 @@ def public_view_players():
 
 @web_app.route('/events')
 def events():
-    return render_template('web/events.html')
+    event_details = get_event_details()
+    return render_template('web/events.html', msg=event_details)
 
 
 @web_app.route('/draws')
@@ -33,4 +36,5 @@ def draws():
 
 @web_app.route('/matches')
 def matches():
-    return render_template('web/matches.html')
+    match_details = get_public_matches_details()
+    return render_template('web/matches.html', msg=match_details)
