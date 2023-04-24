@@ -17,6 +17,7 @@ class Match(db.Model):
     tournament_id = db.Column(db.Integer, ForeignKey('tournament.tournament_id'), nullable=False)
     event_id = db.Column(db.Integer, ForeignKey('event.event_id'), nullable=False)
     result_id = db.Column(db.Integer, ForeignKey('result.result_id'), nullable=True)
+    match_status = db.Column(db.String(30), nullable=False)
     side_one_player_1_rel = db.relationship('Player', foreign_keys=[side_one_player_1],
                                             backref='matches_side_one_player_1')
     side_one_player_2_rel = db.relationship('Player', foreign_keys=[side_one_player_2],
@@ -27,7 +28,8 @@ class Match(db.Model):
                                             backref='matches_side_two_player_2')
 
     def __init__(self, date: str, side_one_player_1: int, side_two_player_1: int, tournament_id: int, event_id: int,
-                 result_id: int = None, side_one_player_2: int = None, side_two_player_2: int = None) -> None:
+                 match_status: str, result_id: int = None, side_one_player_2: int = None,
+                 side_two_player_2: int = None) -> None:
         """
         Initialize a Match object with the given attributes.
         date: The date of the match in MM-DD-YYYY format.
@@ -38,6 +40,7 @@ class Match(db.Model):
         tournament_id: The id of the tournament this match was played in.
         event_id: The id of the event this match was played in.
         result_id: The id of the result of this match.
+        match_status: In progress, Upcoming, Finished
         """
         self.date = date
         self.side_one_player_1 = side_one_player_1
@@ -47,9 +50,10 @@ class Match(db.Model):
         self.tournament_id = tournament_id
         self.event_id = event_id
         self.result_id = result_id
+        self.match_status = match_status
 
         def __repr__():
             return f"<Match(match_id={self.match_id}, date={self.date}, side_one_player_1={self.side_one_player_1}," \
                    f" side_one_player_2={self.side_one_player_2}, side_two_player_1={self.side_two_player_1}," \
                    f" side_two_player_2={self.side_two_player_2}, tournament_id={self.tournament_id}," \
-                   f" event_id={self.event_id}, result_id={self.result_id})>"
+                   f" match_status={self.match_status}, event_id={self.event_id}, result_id={self.result_id})>"
