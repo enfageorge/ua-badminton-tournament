@@ -56,3 +56,12 @@ def make_draw_for_one_event(event):
 def return_players_name(player_id):
     user_obj = Users.query.get(player_id)
     return " ".join([user_obj.first_name, user_obj.last_name])
+
+
+def return_events_with_draws():
+    events = Event.query.all()
+    draws_set = []
+    for event in events:
+        if event.draw_set:
+            draws_set.append(event.event_id)
+    return draws_set

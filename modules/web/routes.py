@@ -3,6 +3,7 @@ from flask import Blueprint, render_template
 from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_events import get_event_details
 from modules.admin.dashboard_matches import get_public_matches_details
+from modules.web.draw import return_events_with_draws
 
 web_app = Blueprint("web", __name__)
 
@@ -31,7 +32,11 @@ def events():
 
 @web_app.route('/draws')
 def draws():
-    return render_template('web/draws.html')
+    events_with_draws = return_events_with_draws()
+    if events_with_draws:
+        return render_template('web/draws.html')
+    else:
+        return render_template('web/no_draws.html')
 
 
 @web_app.route('/matches')
