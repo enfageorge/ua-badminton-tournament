@@ -35,9 +35,9 @@ def admin_events():
 @admin_login_required
 def enter_seed():
     if request.method == "POST":
-        seed_updated = assign_seeding(request)
         event_details = get_event_details()
-        return render_template('admin/admin_events.html', msg=event_details)
+        seed_updated_details = assign_seeding(request, event_details)
+        return render_template('admin/admin_events.html', msg=seed_updated_details)
 
 
 @admin_app.route('/admin/matches')

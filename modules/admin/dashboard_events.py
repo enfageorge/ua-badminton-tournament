@@ -4,16 +4,81 @@ from models.tables.players_event_seed import PlayersEventSeed
 from models.tables.event import Event
 
 
-def assign_seeding(request):
-    ms_events_details = []
-    ws_events_details = []
-    md_events_details = []
-    wd_events_details = []
-    xd_events_details = []
-    u19_events_details = []
-    u17_events_details = []
+def assign_seeding(request, event_details):
+    ms_events_details = event_details["ms_events_details"]
+    ws_events_details = event_details["ws_events_details"]
+    md_events_details = event_details["md_events_details"]
+    wd_events_details = event_details["wd_events_details"]
+    xd_events_details = event_details["xd_events_details"]
+    u19_events_details = event_details["u19_events_details"]
+    u17_events_details = event_details["u17_events_details"]
 
-    print(request.form)
+    data = request.form
+    print(data)
+    seed_list = data.getlist('seed')
+    if 'ms_events_details' in data:
+        print("Ms in")
+        i = 0
+        for entry in ms_events_details:
+            entry['seed'] = seed_list[i]
+            seed_table_entry = PlayersEventSeed.query.filter_by(players_event_seed_id=entry['event_table_id']).first()
+            seed_table_entry.seeding_score = entry['seed']
+            db.session.commit()
+            i += 1
+    elif 'ws_events_details' in data:
+        print("Ws in")
+        i = 0
+        for entry in ws_events_details:
+            entry['seed'] = seed_list[i]
+            seed_table_entry = PlayersEventSeed.query.filter_by(players_event_seed_id=entry['event_table_id']).first()
+            seed_table_entry.seeding_score = entry['seed']
+            db.session.commit()
+            i += 1
+    elif 'md_events_details' in data:
+        print("md in")
+        i = 0
+        for entry in md_events_details:
+            entry['seed'] = seed_list[i]
+            seed_table_entry = PlayersEventSeed.query.filter_by(players_event_seed_id=entry['event_table_id']).first()
+            seed_table_entry.seeding_score = entry['seed']
+            db.session.commit()
+            i += 1
+    elif 'wd_events_details' in data:
+        print("Wd in")
+        i = 0
+        for entry in wd_events_details:
+            entry['seed'] = seed_list[i]
+            seed_table_entry = PlayersEventSeed.query.filter_by(players_event_seed_id=entry['event_table_id']).first()
+            seed_table_entry.seeding_score = entry['seed']
+            db.session.commit()
+            i += 1
+    elif 'xd_events_details' in data:
+        print("xd in")
+        i = 0
+        for entry in xd_events_details:
+            entry['seed'] = seed_list[i]
+            seed_table_entry = PlayersEventSeed.query.filter_by(players_event_seed_id=entry['event_table_id']).first()
+            seed_table_entry.seeding_score = entry['seed']
+            db.session.commit()
+            i += 1
+    elif 'u17_events_details' in data:
+        print("u17 in")
+        i = 0
+        for entry in u17_events_details:
+            entry['seed'] = seed_list[i]
+            seed_table_entry = PlayersEventSeed.query.filter_by(players_event_seed_id=entry['event_table_id']).first()
+            seed_table_entry.seeding_score = entry['seed']
+            db.session.commit()
+            i += 1
+    elif 'u19_events_details' in data:
+        print("u19 in")
+        i = 0
+        for entry in u19_events_details:
+            entry['seed'] = seed_list[i]
+            seed_table_entry = PlayersEventSeed.query.filter_by(players_event_seed_id=entry['event_table_id']).first()
+            seed_table_entry.seeding_score = entry['seed']
+            db.session.commit()
+            i += 1
 
     return {"ms_events_details": ms_events_details,
             "ws_events_details": ws_events_details,
@@ -46,7 +111,8 @@ def get_event_details():
                     ms_events_details.append({
                         'id': ms_no,
                         'player1': user1_entry.first_name + ' ' + user1_entry.last_name,
-                        'seed': reg_entry.seeding_score
+                        'seed': reg_entry.seeding_score,
+                        'event_table_id': reg_entry.players_event_seed_id
                     })
                     ms_no += 1
         elif event.event_name == 'WS':
@@ -57,7 +123,8 @@ def get_event_details():
                     ws_events_details.append({
                         'id': ws_no,
                         'player1': user1_entry.first_name + ' ' + user1_entry.last_name,
-                        'seed': reg_entry.seeding_score
+                        'seed': reg_entry.seeding_score,
+                        'event_table_id': reg_entry.players_event_seed_id
                     })
                     ws_no += 1
         elif event.event_name == 'MD':
@@ -70,7 +137,8 @@ def get_event_details():
                         'id': md_no,
                         'player1': user1_entry.first_name + ' ' + user1_entry.last_name,
                         'player2': user2_entry.first_name + ' ' + user2_entry.last_name,
-                        'seed': reg_entry.seeding_score
+                        'seed': reg_entry.seeding_score,
+                        'event_table_id': reg_entry.players_event_seed_id
                     })
                     md_no += 1
         elif event.event_name == 'WD':
@@ -83,7 +151,8 @@ def get_event_details():
                         'id': wd_no,
                         'player1': user1_entry.first_name + ' ' + user1_entry.last_name,
                         'player2': user2_entry.first_name + ' ' + user2_entry.last_name,
-                        'seed': reg_entry.seeding_score
+                        'seed': reg_entry.seeding_score,
+                        'event_table_id': reg_entry.players_event_seed_id
                     })
                     wd_no += 1
         elif event.event_name == 'XD':
@@ -96,7 +165,8 @@ def get_event_details():
                         'id': xd_no,
                         'player1': user1_entry.first_name + ' ' + user1_entry.last_name,
                         'player2': user2_entry.first_name + ' ' + user2_entry.last_name,
-                        'seed': reg_entry.seeding_score
+                        'seed': reg_entry.seeding_score,
+                        'event_table_id': reg_entry.players_event_seed_id
                     })
                     xd_no += 1
         elif event.event_name == 'U19':
@@ -107,7 +177,8 @@ def get_event_details():
                     u19_events_details.append({
                         'id': u19_no,
                         'player1': user1_entry.first_name + ' ' + user1_entry.last_name,
-                        'seed': reg_entry.seeding_score
+                        'seed': reg_entry.seeding_score,
+                        'event_table_id': reg_entry.players_event_seed_id
                     })
                     u19_no += 1
         elif event.event_name == 'U17':
@@ -118,7 +189,8 @@ def get_event_details():
                     u17_events_details.append({
                         'id': u17_no,
                         'player1': user1_entry.first_name + ' ' + user1_entry.last_name,
-                        'seed': reg_entry.seeding_score
+                        'seed': reg_entry.seeding_score,
+                        'event_table_id': reg_entry.players_event_seed_id
                     })
                     u17_no += 1
 
