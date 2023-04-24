@@ -10,6 +10,7 @@ class Match(db.Model):
     __tablename__ = "match"
     match_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     date = db.Column(db.Date, default=datetime.utcnow())
+    court_no = db.Column(db.Integer, nullable=True)
     side_one_player_1 = db.Column(db.Integer, ForeignKey('player.player_id'), nullable=False)
     side_one_player_2 = db.Column(db.Integer, ForeignKey('player.player_id'), nullable=True)
     side_two_player_1 = db.Column(db.Integer, ForeignKey('player.player_id'), nullable=False)
@@ -27,7 +28,7 @@ class Match(db.Model):
     side_two_player_2_rel = db.relationship('Player', foreign_keys=[side_two_player_2],
                                             backref='matches_side_two_player_2')
 
-    def __init__(self, date: str, side_one_player_1: int, side_two_player_1: int, tournament_id: int, event_id: int,
+    def __init__(self, date: str, court_no: int, side_one_player_1: int, side_two_player_1: int, tournament_id: int, event_id: int,
                  match_status: str, result_id: int = None, side_one_player_2: int = None,
                  side_two_player_2: int = None) -> None:
         """
@@ -43,6 +44,7 @@ class Match(db.Model):
         match_status: In progress, Upcoming, Finished
         """
         self.date = date
+        self.court_no = court_no
         self.side_one_player_1 = side_one_player_1
         self.side_one_player_2 = side_one_player_2
         self.side_two_player_1 = side_two_player_1
@@ -53,7 +55,8 @@ class Match(db.Model):
         self.match_status = match_status
 
         def __repr__():
-            return f"<Match(match_id={self.match_id}, date={self.date}, side_one_player_1={self.side_one_player_1}," \
+            return f"<Match(match_id={self.match_id}, date={self.date}, court_no={court_no}," \
+                   f" side_one_player_1={self.side_one_player_1}," \
                    f" side_one_player_2={self.side_one_player_2}, side_two_player_1={self.side_two_player_1}," \
                    f" side_two_player_2={self.side_two_player_2}, tournament_id={self.tournament_id}," \
                    f" match_status={self.match_status}, event_id={self.event_id}, result_id={self.result_id})>"

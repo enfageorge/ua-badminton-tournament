@@ -18,7 +18,7 @@ def get_matches_details():
     for match in in_progress_and_upcoming_matches:
         match_detail = {}
         match_detail['id'] = match.match_id
-        match_detail['court_no'] = 0  # no court num in match
+        match_detail['court_no'] = match.court_no
         event = Event.query.get(match.event_id)
         match_detail['event'] = event.event_name
         match_detail['event'] = match.event.event_name
@@ -56,7 +56,7 @@ def get_matches_details():
         match_detail['id'] = match.match_id
         match_detail['event'] = match.event.event_name
         match_detail['score'] = match.result.result_score
-        match_detail['court_no'] = 0  # no court num in match
+        match_detail['court_no'] = match.court_no  # no court num in match
         match_detail['status'] = 'Finished'
         players_side_one = []
         for player_id in [match.side_one_player_1, match.side_one_player_2]:
@@ -91,3 +91,8 @@ def get_matches_details():
         finished_match_details.append(match_detail)
 
     return {"in_progress_matches": in_progress_match_details, "finished_matches": finished_match_details}
+
+
+def set_matches_details(request, match_details):
+    print(f"Request ***** {request.form}");
+
