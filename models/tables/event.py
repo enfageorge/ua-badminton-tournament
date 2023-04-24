@@ -10,6 +10,7 @@ class Event(db.Model):
     event_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     event_name = db.Column(db.String(50))
     gender_allowed = db.Column(db.String(10), nullable=True)
+    draw_set = db.Column(db.Boolean, default=False)
     max_participants_allowed = db.Column(db.Integer, nullable=True)
     matches = db.relationship("Match", backref="event", lazy=True)
     players_event_seeds = db.relationship('PlayersEventSeed', backref='event', lazy=True)
