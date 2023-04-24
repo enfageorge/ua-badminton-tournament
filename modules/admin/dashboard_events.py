@@ -14,10 +14,8 @@ def assign_seeding(request, event_details):
     u17_events_details = event_details["u17_events_details"]
 
     data = request.form
-    print(data)
     seed_list = data.getlist('seed')
     if 'ms_events_details' in data:
-        print("Ms in")
         i = 0
         for entry in ms_events_details:
             entry['seed'] = seed_list[i]
@@ -26,7 +24,6 @@ def assign_seeding(request, event_details):
             db.session.commit()
             i += 1
     elif 'ws_events_details' in data:
-        print("Ws in")
         i = 0
         for entry in ws_events_details:
             entry['seed'] = seed_list[i]
@@ -35,7 +32,6 @@ def assign_seeding(request, event_details):
             db.session.commit()
             i += 1
     elif 'md_events_details' in data:
-        print("md in")
         i = 0
         for entry in md_events_details:
             entry['seed'] = seed_list[i]
@@ -44,7 +40,6 @@ def assign_seeding(request, event_details):
             db.session.commit()
             i += 1
     elif 'wd_events_details' in data:
-        print("Wd in")
         i = 0
         for entry in wd_events_details:
             entry['seed'] = seed_list[i]
@@ -53,7 +48,6 @@ def assign_seeding(request, event_details):
             db.session.commit()
             i += 1
     elif 'xd_events_details' in data:
-        print("xd in")
         i = 0
         for entry in xd_events_details:
             entry['seed'] = seed_list[i]
@@ -62,7 +56,6 @@ def assign_seeding(request, event_details):
             db.session.commit()
             i += 1
     elif 'u17_events_details' in data:
-        print("u17 in")
         i = 0
         for entry in u17_events_details:
             entry['seed'] = seed_list[i]
@@ -71,7 +64,6 @@ def assign_seeding(request, event_details):
             db.session.commit()
             i += 1
     elif 'u19_events_details' in data:
-        print("u19 in")
         i = 0
         for entry in u19_events_details:
             entry['seed'] = seed_list[i]

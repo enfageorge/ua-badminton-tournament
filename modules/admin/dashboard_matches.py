@@ -35,7 +35,6 @@ def get_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_one.append(player_name)
-                print(f"players_side_one - {players_side_one}")
         players_side_two = []
         for player_id in [match.side_two_player_1, match.side_two_player_2]:
             if player_id:
@@ -43,7 +42,6 @@ def get_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
-                print(f"players_side_two - {players_side_two}")
 
         side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
         side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
@@ -65,7 +63,6 @@ def get_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_one.append(player_name)
-                print(players_side_one)
         players_side_two = []
         for player_id in [match.side_two_player_1, match.side_two_player_2]:
             if player_id:
@@ -73,7 +70,6 @@ def get_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
-                print(players_side_two)
 
         side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
         side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
@@ -116,7 +112,6 @@ def get_public_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_one.append(player_name)
-                print(players_side_one)
         players_side_two = []
         for player_id in [match.side_two_player_1, match.side_two_player_2]:
             if player_id:
@@ -124,7 +119,6 @@ def get_public_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
-                print(players_side_two)
 
         side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
         side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
@@ -140,8 +134,6 @@ def get_public_matches_details():
             winner_name += f" / {winner_2_user.first_name} {winner_2_user.last_name}"
         match_detail['winner'] = winner_name
         finished_match_details.append(match_detail)
-
-        print(finished_match_details)
 
     return {"upcoming_matches": upcoming_match_details, "in_progress_matches": in_progress_match_details,
             "finished_matches": finished_match_details}

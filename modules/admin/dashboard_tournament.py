@@ -3,37 +3,26 @@ def get_tournament_details(request):
         # INSERT to Tournament table
         if 'name' in request.form:
             name = request.form['name']
-            print(name)
         if 'venue' in request.form:
             venue = request.form['venue']
-            print(venue)
         if 'location' in request.form:
             location = request.form['location']
-            print(location)
         if 'registration_open' in request.form:
             registration_open = request.form['registration_open']
-            print(registration_open)
         if 'registration_deadline' in request.form:
             registration_deadline = request.form['registration_deadline']
-            print(registration_deadline)
         if 'withdraw_deadline' in request.form:
             withdraw_deadline = request.form['withdraw_deadline']
-            print(withdraw_deadline)
         if 'tournament_start_date' in request.form:
             tournament_start_date = request.form['tournament_start_date']
-            print(tournament_start_date)
         if 'tournament_end_date' in request.form:
             tournament_end_date = request.form['tournament_end_date']
-            print(tournament_end_date)
         if 'events' in request.form:
             events = request.form['events']
-            print(events)
         if 'Regulations' in request.form:
             Regulations = request.form['Regulations']
-            print(Regulations)
         if 'announcements' in request.form:
             announcements = request.form['announcements']
-            print(announcements)
 
         # need to write data to DB.
 
