@@ -41,7 +41,7 @@ def enter_seed():
         return render_template('admin/admin_events.html', msg=seed_updated_details)
 
 
-@admin_app.route('/admin/make_draw', methods=['GET','POST'])
+@admin_app.route('/admin/make_draw', methods=['GET', 'POST'])
 @admin_login_required
 def make_draw():
     make_draws()
