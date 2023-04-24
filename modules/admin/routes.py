@@ -2,14 +2,8 @@ from flask import Blueprint, render_template, request
 
 from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_tournament import get_tournament_details
-<<<<<<< HEAD
-from modules.admin.dashboard_events import get_event_details
-from modules.admin.dashboard_matches import get_matches_details, set_matches_details
-=======
 from modules.admin.dashboard_events import get_event_details, assign_seeding
-from modules.admin.dashboard_matches import get_matches_details
->>>>>>> main
-
+from modules.admin.dashboard_matches import get_matches_details, set_matches_details
 from modules.decoraters import admin_login_required
 
 admin_app = Blueprint("admin", __name__)

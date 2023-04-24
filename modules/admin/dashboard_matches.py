@@ -116,7 +116,7 @@ def get_public_matches_details():
         match_detail['id'] = match.match_id
         match_detail['event'] = match.event.event_name
         match_detail['score'] = match.result.result_score
-        match_detail['court_no'] = 0  # no court num in match
+        match_detail['court_no'] = "" if not match.court_no else match.court_no
         match_detail['status'] = 'Finished'
         players_side_one = []
         for player_id in [match.side_one_player_1, match.side_one_player_2]:
