@@ -22,33 +22,44 @@ def make_draw_for_one_event(event):
     # Sort all players by seeding score
     sorted_players = sorted(players, key=lambda player: player.seeding_score)
     number_of_draws: int = int(len(sorted_players) / 2)
-    draw_col0 = []
+    players = []
+    index = 1
 
     for player_no in range(number_of_draws):
         player_set_one = sorted_players[player_no].player_1, sorted_players[player_no].player_2
         player_set_two = sorted_players[-1 - player_no].player_1, sorted_players[-1 - player_no].player_2
 
         if player_set_one[1] is not None:  # Doubles
-            draw_col0.append([return_players_name(player_set_one[0]) + " , " + return_players_name(player_set_one[1]),
-                              return_players_name(player_set_two[0]) + " , " + return_players_name(player_set_two[1])])
+            players.append([{'index': index,
+                               'names': return_players_name(player_set_one[0]) + " , " + return_players_name(
+                                   player_set_one[1])},
+                              {'index': index + 1,
+                               'names': return_players_name(player_set_one[0]) + " , " + return_players_name(
+                                   player_set_one[1])}])
         else:  # Singles
-            draw_col0.append([return_players_name(player_set_one[0]),
-                              return_players_name(player_set_two[0])])
+            players.append([{'index': index, 'names': return_players_name(player_set_one[0])},
+                              {'index': index + 1, 'names': return_players_name(player_set_two[0])}])
+
+        index += 2
 
     # If there are an odd number of registrations, we pair a player with an empty placeholder player
     if len(sorted_players) % 2 != 0:  # There is an odd number of registrations
         middle_candidate = int(len(sorted_players) / 2) + 1
         player_set = sorted_players[middle_candidate].player_1, sorted_players[middle_candidate].player_2
         if player_set[1] is not None:  # Doubles
-            draw_col0.append([return_players_name(player_set[0]) + " , " + return_players_name(player_set[1]),
-                              " "])
+            players.append([{'index': index,
+                               'names': return_players_name(player_set[0]) + " , " + return_players_name(
+                                   player_set[1])},
+                              {'index': " ",
+                               'names': " "}])
         else:  # Singles
-            draw_col0.append([return_players_name(player_set[0]), ""])
+            players.append([{'index': index, 'names': return_players_name(player_set[0])},
+                              {'index': " ", 'names': " "}])
 
     return {
         'event_id': event_id,
         'event_name': event_details.event_name,
-        'col_0': draw_col0
+        'players': players
     }
 
 
