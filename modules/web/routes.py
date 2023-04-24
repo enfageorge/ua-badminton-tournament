@@ -32,11 +32,11 @@ def events():
 
 @web_app.route('/draws')
 def draws():
-    events_with_draws = return_events_with_draws()
-    if events_with_draws:
-        return render_template('web/draws.html')
+    draws_boolean, draws_info = return_events_with_draws()
+    if draws_boolean:
+        return render_template('web/draws.html', msg=draws_info)
     else:
-        return render_template('web/no_draws.html')
+        return render_template('web/draws.html')
 
 
 @web_app.route('/matches')
