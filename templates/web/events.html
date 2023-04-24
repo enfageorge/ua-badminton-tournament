@@ -16,6 +16,151 @@
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
      <!-- TABLE STYLES-->
     <link href="static/dataTables.bootstrap.css" rel="stylesheet" />
+    <script>
+        function input(data) {
+            const tableDataDiv = document.createElement('div');
+            tableDataDiv.classList.add('form-group');
+            const input = document.createElement('input');
+            input.classList.add('form-control');
+            input.setAttribute("placeholder", "Enter Score")
+            input.value = data;
+            tableDataDiv.append(input);
+            return tableDataDiv;
+        }
+
+        window.onload = function () {
+            msg = "{{ msg }}";
+            var data = JSON.parse(msg.replace(/&quot;/g, '"').replace(/&#39;/g, '"').replace(/[\u0000-\u001F]+/g, ""));
+            console.log("Data in html: ", data);
+            for (var i = 0; i < data["ms_events_details"].length; i++) {
+                match = data["ms_events_details"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.player1;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.seed;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                document.getElementById('ms_events_details').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["md_events_details"].length; i++) {
+                match = data["md_events_details"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.player1;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.player2;
+                const tableData4 = document.createElement('td');
+                tableData4.textContent = match.seed;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                tableRow.appendChild(tableData4);
+                document.getElementById('md_events_details').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["ws_events_details"].length; i++) {
+                match = data["ws_events_details"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.player1;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.seed;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                document.getElementById('ws_events_details').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["wd_events_details"].length; i++) {
+                match = data["wd_events_details"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.player1;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.player2;
+                const tableData4 = document.createElement('td');
+                tableData4.textContent = match.seed;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                tableRow.appendChild(tableData4);
+                document.getElementById('wd_events_details').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["xd_events_details"].length; i++) {
+                match = data["xd_events_details"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.player1;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.player2;
+                const tableData4 = document.createElement('td');
+                tableData4.textContent = match.seed;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                tableRow.appendChild(tableData4);
+                document.getElementById('xd_events_details').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["u19_events_details"].length; i++) {
+                match = data["u19_events_details"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.player1;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.seed;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                document.getElementById('u19_events_details').appendChild(tableRow);
+            }
+
+            for (var i = 0; i < data["u17_events_details"].length; i++) {
+                match = data["u17_events_details"][i];
+                const tableRow = document.createElement('tr');
+                tableRow.classList.add('odd', 'gradeX');
+                const tableData1 = document.createElement('td');
+                tableData1.textContent = match.id;
+                const tableData2 = document.createElement('td');
+                tableData2.textContent = match.player1;
+                const tableData3 = document.createElement('td');
+                tableData3.textContent = match.seed;
+
+                tableRow.appendChild(tableData1);
+                tableRow.appendChild(tableData2);
+                tableRow.appendChild(tableData3);
+                document.getElementById('u17_events_details').appendChild(tableRow);
+            }
+        }
+    </script>
 </head>
 <body>
     <div id="wrapper-public">
@@ -27,7 +172,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home.html">UA Badminton Tournament</a>
+                <a class="navbar-brand" href="{{url_for('web.home')}}">UA Badminton Tournament</a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
@@ -86,23 +231,13 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Player 1</th>
                                                 <th>Seed</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>Joey</td>
-                                                <td>
-                                                    1
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>Michael</td>
-                                                <td>
-                                                    2
-                                                </td>
-                                            </tr>
+                                        <tbody id="ms_events_details">
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -123,26 +258,14 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Player 1</th>
                                                 <th>Player 2</th>
                                                 <th>Seed</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>Neil</td>
-                                                <td>Jon</td>
-                                                <td>
-                                                    1
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>Joey</td>
-                                                <td>Dan</td>
-                                                <td>
-                                                    2
-                                                </td>
-                                            </tr>
+                                        <tbody id="md_events_details">
+
                                         </tbody>
                                     </table>
 
@@ -165,24 +288,13 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Player 1</th>
                                                 <th>Seed</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>Zoey</td>
-                                                <td>
-                                                    1
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeU">
+                                        <tbody id="ws_events_details">
 
-                                                <td>Hanna</td>
-                                                <td>
-                                                    2
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -205,26 +317,14 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Player 1</th>
                                                 <th>Player 2</th>
                                                 <th>Seed</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>Jill</td>
-                                                <td>Rebecca</td>
-                                                <td>
-                                                    1
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>Rina</td>
-                                                <td>Jennifer</td>
-                                                <td>
-                                                    2
-                                                </td>
-                                            </tr>
+                                        <tbody id="wd_events_details">
+
                                         </tbody>
                                     </table>
 
@@ -247,26 +347,14 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Player 1</th>
                                                 <th>Player 2</th>
                                                 <th>Seed</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>Kaden</td>
-                                                <td>Luna</td>
-                                                <td>
-                                                    1
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>Lilly</td>
-                                                <td>Bruce</td>
-                                                <td>
-                                                    2
-                                                </td>
-                                            </tr>
+                                        <tbody id="xd_events_details">
+
                                         </tbody>
                                     </table>
 
@@ -289,24 +377,13 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Player 1</th>
                                                 <th>Seed</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
+                                        <tbody id="u19_events_details">
 
-                                                <td>Grace</td>
-                                                <td>
-                                                    1
-                                                </td>
-                                            </tr>
-                                            <tr class="gradeU">
-                                                <td>Malaya</td>
-                                                <td>
-                                                    2
-                                                </td>
-                                            </tr>
                                         </tbody>
                                     </table>
 
@@ -329,17 +406,13 @@
                                     <table class="table table-striped table-bordered table-hover" id="dataTables-example">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Player 1</th>
                                                 <th>Seed</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr class="odd gradeX">
-                                                <td>Mike</td>
-                                                <td>
-                                                    1
-                                                </td>
-                                            </tr>
+                                        <tbody id="u17_events_details">
+
                                         </tbody>
                                     </table>
 
@@ -355,18 +428,7 @@
 
              <!-- /. PAGE INNER  -->
     </div>
-         <!-- /. PAGE WRAPPER  -->
-     <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
-<!--    <script src="assets/js/jquery-1.10.2.js"></script>-->
-<!--      &lt;!&ndash; Bootstrap Js &ndash;&gt;-->
-<!--    <script src="assets/js/bootstrap.min.js"></script>-->
-<!--    &lt;!&ndash; Metis Menu Js &ndash;&gt;-->
-<!--    <script src="assets/js/jquery.metisMenu.js"></script>-->
-<!--     &lt;!&ndash; DATA TABLE SCRIPTS &ndash;&gt;-->
-<!--    <script src="assets/js/dataTables/jquery.dataTables.js"></script>-->
-<!--    <script src="assets/js/dataTables/dataTables.bootstrap.js"></script>-->
+
     <script>
             $(document).ready(function () {
                 $('#dataTables-example').dataTable();

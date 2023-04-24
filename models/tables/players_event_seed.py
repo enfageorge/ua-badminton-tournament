@@ -34,5 +34,5 @@ class PlayersEventSeed(db.Model):
 
     def __repr__(self) -> str:
         """Return a string representation of the players_event_seed object."""
-        return f"<PlayersEventSeed(players_event_seed_id={self.seed_id}, player_1={self.player_1}, " \
+        return f"<PlayersEventSeed(players_event_seed_id={self.players_event_seed_id}, player_1={self.player_1}, " \
                f"player_2={self.player_2}, seeding_score={self.seeding_score}, event_id={self.event_id})>"
