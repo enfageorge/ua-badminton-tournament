@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session
 
-from modules.admin.dashboard_home import get_player_details
+from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_tournament import get_tournament_details, post_tournament_details
 from modules.admin.dashboard_events import get_event_details, assign_seeding
 
@@ -23,6 +23,7 @@ def admin_dashboard():
 def admin_form():
     tournament_details = get_tournament_details(request)
     return render_template('admin/admin_form.html', msg=tournament_details)
+
 
 @admin_app.route('/admin/tournament_creation', methods=['POST'])
 @admin_login_required
