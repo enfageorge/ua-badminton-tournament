@@ -4,7 +4,7 @@ from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_tournament import get_tournament_details, post_tournament_details
 from modules.admin.dashboard_events import get_event_details, assign_seeding
 
-from modules.admin.dashboard_matches import get_matches_details
+from modules.admin.dashboard_matches import get_matches_details, set_matches_court_no_and_status, set_matches_result
 
 from modules.decoraters import admin_login_required
 
@@ -15,7 +15,7 @@ admin_app = Blueprint("admin", __name__)
 @admin_login_required
 def admin_dashboard():
     player_details = get_player_roaster()
-    return render_template('admin/admin_dashboard.html', msg = player_details)
+    return render_template('admin/admin_dashboard.html', msg=player_details)
 
 
 @admin_app.route('/admin/tournament', methods=['GET'])
@@ -49,10 +49,27 @@ def enter_seed():
         return render_template('admin/admin_events.html', msg=seed_updated_details)
 
 
-@admin_app.route('/admin/matches')
+@admin_app.route('/admin/matches', methods=['GET', 'POST'])
 @admin_login_required
 def admin_matches():
-    print("Hello")
     match_details = get_matches_details()
-    print(match_details)
     return render_template('admin/admin_matches.html', msg=match_details)
+
+
+@admin_app.route('/admin/update_matches', methods=['POST'])
+@admin_login_required
+def update_matches():
+    if request.method == "POST":
+        set_matches_court_no_and_status(request)
+        get_updated_match_details = get_matches_details()
+        return render_template('admin/admin_matches.html', msg=get_updated_match_details)
+
+
+@admin_app.route('/admin/update_results', methods=['POST'])
+@admin_login_required
+def update_results():
+    if request.method == "POST":
+        print(request.form)
+        set_matches_result(request)
+        get_updated_match_details = get_matches_details()
+        return render_template('admin/admin_matches.html', msg=get_updated_match_details)
