@@ -10,7 +10,7 @@ class Result(db.Model):
     result_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     result_name = db.Column(db.String(20), nullable=True)  # result obtained, results awaiting etc.
     result_score = db.Column(db.String(30), nullable=True)
-    winner_player_1 = db.Column(db.Integer, db.ForeignKey('player.player_id'), nullable=False)
+    winner_player_1 = db.Column(db.Integer, db.ForeignKey('player.player_id'), nullable=True)
     winner_player_2 = db.Column(db.Integer, db.ForeignKey('player.player_id'), nullable=True)
     winner_player_1_rel = db.relationship('Player', foreign_keys=[winner_player_1],
                                             backref='winner_player_1_rel', lazy=True)
