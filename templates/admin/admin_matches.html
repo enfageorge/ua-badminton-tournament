@@ -80,7 +80,8 @@
                 const tableData4 = document.createElement('td');
                 tableData4.append(input(match.score, "score", true));
                 const tableData5 = document.createElement('td');
-                tableData5.append(options(match.match_up, match.winner));
+                tableData5.append(options([match.players_side_one, match.players_side_two, ""], match.winner, "winner"));
+
                 tableRow.appendChild(tableData1);
                 tableRow.appendChild(tableData2);
                 tableRow.appendChild(tableData3);
