@@ -131,6 +131,7 @@ def set_matches_court_no_and_status(request):
                 match.match_status = match_status
             db.session.commit()
 
+
 def set_matches_result(request):
     """
     This method is supposed to create a result in result table, and update the match table with this result id
@@ -143,6 +144,7 @@ def set_matches_result(request):
     # Update the match table and set this result ID against the match ID
     # Handle results participants
     return
+
 
 def get_public_matches_details():
     """
@@ -158,6 +160,59 @@ def get_public_matches_details():
     in_progress_match_details = []
     finished_match_details = []
 
+    for match in upcoming_matches:
+        match_detail = {}
+        match_detail['id'] = match.match_id
+        match_detail['event'] = match.event.event_name
+
+        players_side_one = []
+        for player_id in [match.side_one_player_1, match.side_one_player_2]:
+            if player_id:
+                player = Player.query.get(player_id)
+                user = Users.query.get(player.player_id)
+                player_name = f"{user.first_name} {user.last_name}"
+                players_side_one.append(player_name)
+        players_side_two = []
+        for player_id in [match.side_two_player_1, match.side_two_player_2]:
+            if player_id:
+                player = Player.query.get(player_id)
+                user = Users.query.get(player.player_id)
+                player_name = f"{user.first_name} {user.last_name}"
+                players_side_two.append(player_name)
+
+        side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
+        side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
+        match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
+
+        upcoming_match_details.append(match_detail)
+
+    for match in in_progress_matches:
+        match_detail = {}
+        match_detail['id'] = match.match_id
+        match_detail['event'] = match.event.event_name
+        match_detail['court_no'] = "" if not match.court_no else match.court_no
+
+        players_side_one = []
+        for player_id in [match.side_one_player_1, match.side_one_player_2]:
+            if player_id:
+                player = Player.query.get(player_id)
+                user = Users.query.get(player.player_id)
+                player_name = f"{user.first_name} {user.last_name}"
+                players_side_one.append(player_name)
+        players_side_two = []
+        for player_id in [match.side_two_player_1, match.side_two_player_2]:
+            if player_id:
+                player = Player.query.get(player_id)
+                user = Users.query.get(player.player_id)
+                player_name = f"{user.first_name} {user.last_name}"
+                players_side_two.append(player_name)
+
+        side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
+        side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
+        match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
+
+        in_progress_match_details.append(match_detail)
+
     for match in finished_matches:
         match_detail = {}
         match_detail['id'] = match.match_id
@@ -172,7 +227,6 @@ def get_public_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_one.append(player_name)
-                print(players_side_one)
         players_side_two = []
         for player_id in [match.side_two_player_1, match.side_two_player_2]:
             if player_id:
@@ -180,7 +234,6 @@ def get_public_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
-                print(players_side_two)
 
         side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
         side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
