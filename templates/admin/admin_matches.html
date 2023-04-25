@@ -20,11 +20,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
-        function options(data, selected) {
+        function options(data, selected, field_name) {
             const tableData5 = document.createElement('td');
             const formGroup = document.createElement('div');
             formGroup.classList.add('form-group');
             const select = document.createElement('select');
+            select.name = field_name;
             select.classList.add('form-control');
             let options = [];
             if(Array.isArray(data)){
@@ -46,36 +47,40 @@
             return formGroup;
         }
 
-        function input(data) {
+        function input(data, field_name, is_editable) {
             const tableDataDiv = document.createElement('div');
             tableDataDiv.classList.add('form-group');
             const input = document.createElement('input');
+            input.name = field_name;
             input.classList.add('form-control');
-            input.setAttribute("placeholder", "Enter Score")
+            input.setAttribute("placeholder", "Enter Score");
             input.value = data;
+             if (!is_editable) {
+                input.setAttribute('readonly', true);
+             }
             tableDataDiv.append(input);
             return tableDataDiv;
         }
-
-        window.onload = function () {
+            window.onload = function () {
             msg = "{{ msg }}";
             var data = JSON.parse(msg.replace(/&quot;/g, '"').replace(/&#39;/g, '"').replace(/[\u0000-\u001F]+/g, ""));
             console.log("Data in html: ", data);
+            // For Result Table
             for (var i = 0; i < data["finished_matches"].length; i++) {
                 match = data["finished_matches"][i];
                 const tableRow = document.createElement('tr');
                 tableRow.classList.add('odd', 'gradeX');
                 const tableData1 = document.createElement('td');
-                tableData1.textContent = match.id;
+                //tableData1.textContent = match.id;
+                tableData1.append(input(match.id, "match_id", false));
                 const tableData2 = document.createElement('td');
                 tableData2.textContent = match.match_up;
                 const tableData3 = document.createElement('td');
                 tableData3.textContent = match.event;
                 const tableData4 = document.createElement('td');
-                tableData4.append(input(match.score));
+                tableData4.append(input(match.score, "score", true));
                 const tableData5 = document.createElement('td');
                 tableData5.append(options(match.match_up, match.winner));
-
                 tableRow.appendChild(tableData1);
                 tableRow.appendChild(tableData2);
                 tableRow.appendChild(tableData3);
@@ -83,23 +88,23 @@
                 tableRow.appendChild(tableData5);
                 document.getElementById('Finished_Matches').appendChild(tableRow);
             }
-
+            // For In progress and upcoming matches table
             for (var i = 0; i < data["in_progress_matches"].length; i++) {
                 match = data["in_progress_matches"][i];
                 const tableRow = document.createElement('tr');
                 tableRow.classList.add('odd', 'gradeX');
                 const tableData1 = document.createElement('td');
-                tableData1.textContent = match.id;
+                tableData1.append(input(match.id, "match_id", false));
                 const tableData2 = document.createElement('td');
-                tableData2.append(options(["", "1", "2", "3", "4", "5", "6"], match.court_no));
+                tableData2.append(options(["", "1", "2", "3", "4", "5", "6"], match.court_no, "court_no"));
                 const tableData3 = document.createElement('td');
                 tableData3.textContent = match.match_up;
                 const tableData4 = document.createElement('td');
                 tableData4.textContent = match.event;
                 const tableData5 = document.createElement('td');
-                tableData5.append(input(match.score));
+                tableData5.append(input(match.score, "score", true));
                 const tableData6 = document.createElement('td');
-                tableData6.append(options(["In-progress", "Not yet played", "Finished"], match.status))
+                tableData6.append(options(["in progress", "upcoming", "finished"], match.status, "match_status"))
 
                 tableRow.appendChild(tableData1);
                 tableRow.appendChild(tableData2);
@@ -166,69 +171,73 @@
                 </div>
             </div>
             <!-- /. ROW  -->
-
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            In-Progress Matches
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Court No.</th>
-                                        <th>Match-up</th>
-                                        <th>Event</th>
-                                        <th>Score</th>
-                                        <th>Status</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="In-ProgressMatches">
-                                    </tbody>
-                                </table>
-
+            <form role="form" action="{{url_for('admin.update_matches')}}" method="post">
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                In-Progress Matches
                             </div>
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                        <tr>
+                                            <th>Match No.</th>
+                                            <th>Court No.</th>
+                                            <th>Match-up</th>
+                                            <th>Event</th>
+                                            <th>Score</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="In-ProgressMatches">
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <button type="submit" class="btn btn-default">Save</button>
+                            </div>
                         </div>
+                        <!--End Advanced Tables -->
                     </div>
-                    <!--End Advanced Tables -->
                 </div>
-            </div>
+            </form>
             <!-- /. ROW  -->
-            <div class="row">
-                <div class="col-md-12">
-                    <!-- Advanced Tables -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Finished Matches
-                        </div>
-                        <div class="panel-body">
-                            <div class="table-responsive">
-                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
-                                    <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Match-up</th>
-                                        <th>Event</th>
-                                        <th>Score</th>
-                                        <th>Winner</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody id="Finished_Matches">
+            <form role="form" action="{{url_for('admin.update_results')}}" method="post">
 
-                                    </tbody>
-                                </table>
+                <div class="row">
+                    <div class="col-md-12">
+                        <!-- Advanced Tables -->
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                Finished Matches
                             </div>
-                            <button type="submit" class="btn btn-default">Save</button>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                                        <thead>
+                                        <tr>
+                                            <th>Match No.</th>
+                                            <th>Match-up</th>
+                                            <th>Event</th>
+                                            <th>Score</th>
+                                            <th>Winner</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody id="Finished_Matches">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <button type="submit" class="btn btn-default">Save</button>
+                            </div>
                         </div>
+                        <!--End Advanced Tables -->
                     </div>
-                    <!--End Advanced Tables -->
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 

@@ -73,24 +73,19 @@
                         </h1>
                     </div>
                 </div>
+                {% for event in msg %}
                  <!-- /. ROW  -->
                 <div class="row">
                     <div class="col-md-12">
                         <!-- Advanced Tables -->
                         <div class="panel panel-default">
                             <div class="panel-heading">
-                                 Mens Singles (MS)
+                                 {{ event['event_name'] }}
                             </div>
                             <div class="panel-body">
                                 <div>
                                     <table class="draw">
                                         <thead>
-                                            <tr>
-                                                <td colspan="1"></td>
-                                                <td colspan="1">&nbsp;Semi Finals&nbsp;</td>
-                                                <td colspan="1">&nbsp;Finals&nbsp;</td>
-                                                <td colspan="1">&nbsp;Winner&nbsp;</td>
-                                            </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
@@ -99,34 +94,36 @@
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                             </tr>
+                                             {% for player_set in event['players'] %}
                                             <tr>
-                                                <td class="border_b">1&nbsp;</td>
+                                                <td class="border_b"> {{ player_set[0]['index']}}&nbsp;</td>
                                                 <td class="border_b drawrulercell drc_31" style="background-color: transparent;">
                                                     &nbsp;
-                                                    <a href="">Judy </a>
+                                                    <a href="">{{ player_set[0]['names'] }} </a>
                                                     <span id="3001" class="match">&nbsp;</span>
                                                 </td>
                                                 <td>&nbsp;</td>
                                                 <td>&nbsp;</td>
                                             </tr>
-                                            <tr>
+                                                 <tr>
                                                 <td>&nbsp;</td>
                                                 <td class="border_r">&nbsp;&nbsp;</td>
                                                 <td class="border_b drawrulercell drc_30" style="background-color: transparent;">
                                                     &nbsp;
-                                                    <a href="">Katheryn</a>
+                                                    <a href=""></a>
                                                     <span id="2001" class="match">&nbsp;</span>
                                                 </td>
                                                 <td>&nbsp;</td>
                                             </tr>
+
                                             <tr>
-                                                <td class="border_b">2&nbsp;</td>
+                                                <td class="border_b">{{ player_set[1]['index']}}&nbsp;</td>
                                                 <td class="border_br drawrulercell drc_30" style="background-color: transparent;">
                                                     &nbsp;
-                                                    <a href="">Katheryn</a>
+                                                    <a href="">{{ player_set[1]['names'] }}</a>
                                                     <span id="3002" class="match">&nbsp;</span>
                                                 </td>
-                                                <td class="border_r">
+                                                <!--<td class="border_r">
                                                     &nbsp;
                                                     <span class="score">
                                                         <span>21-16</span>
@@ -134,74 +131,10 @@
                                                     </span>
                                                     &nbsp;
                                                 </td>
-                                                <td>&nbsp;</td>
+                                                <td>&nbsp;</td> -->
                                             </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;</td>
-                                                <td class="border_r">
-                                                    &nbsp;
-                                                </td>
-                                                <td class="border_b drawrulercell drc_29" style="background-color: transparent;">
-                                                    &nbsp;
-                                                    <a href="">Savannah</a>
-                                                    <span id="1001" class="match">
-                                                        &nbsp;
-                                                    </span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="border_b">3&nbsp;</td>
-                                                <td class="border_b drawrulercell drc_29" style="background-color: transparent;">
-                                                    &nbsp;
-                                                    <a href="">Savannah</a>
-                                                    <span id="3003" class="match">&nbsp;</span>
-                                                </td>
-                                                <td class="border_r">&nbsp;</td>
-                                                <td>
-                                                    &nbsp;
-                                                    <span class="score">
-                                                        <span>18-21</span>
-                                                        <span>21-8</span>
-                                                        <span>21-14</span>
-                                                    </span>
-                                                    &nbsp;
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td class="border_r">&nbsp;&nbsp;</td>
-                                                <td class="border_br drawrulercell drc_29" style="background-color: transparent;">
-                                                    &nbsp;
-                                                    <a href="">Savannah</a>
-                                                    <span id="2002" class="match">&nbsp;</span>
-                                                </td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td class="border_b">4&nbsp;</td>
-                                                <td class="border_br drawrulercell drc_28" style="background-color: transparent;">
-                                                    &nbsp;
-                                                    <a href="">Kate</a>
-                                                    <span id="3004" class="match">&nbsp;</span>
-                                                </td>
-                                                <td>
-                                                    &nbsp;
-                                                    <span class="score">
-                                                        <span>21-12</span>
-                                                        <span>21-23</span>
-                                                        <span>21-19</span>
-                                                    </span>
-                                                    &nbsp;
-                                                </td>
-                                                <td>&nbsp;</td>
-                                            </tr>
-                                            <tr>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                                <td>&nbsp;</td>
-                                            </tr>
+
+                                                 {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
@@ -210,95 +143,7 @@
                         <!--End Advanced Tables -->
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Advanced Tables -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                 Mens Doubles (MD)
-                            </div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-                        <!--End Advanced Tables -->
-                    </div>
-                </div>
-                <!-- /. ROW  -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Advanced Tables -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                 Womens Singles (WS)
-                            </div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-                        <!--End Advanced Tables -->
-                    </div>
-                </div>
-                <!-- /. ROW  -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Advanced Tables -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                 Womens Doubles (WD)
-                            </div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-                        <!--End Advanced Tables -->
-                    </div>
-                </div>
-                <!-- /. ROW  -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Advanced Tables -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                 Mix Doubles (XD)
-                            </div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-                        <!--End Advanced Tables -->
-                    </div>
-                </div>
-                <!-- /. ROW  -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Advanced Tables -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                 Under 19 (U19)
-                            </div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-                        <!--End Advanced Tables -->
-                    </div>
-                </div>
-                <!-- /. ROW  -->
-                <div class="row">
-                    <div class="col-md-12">
-                        <!-- Advanced Tables -->
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                 Under 17 (U17)
-                            </div>
-                            <div class="panel-body">
-
-                            </div>
-                        </div>
-                        <!--End Advanced Tables -->
-                    </div>
-                </div>
+                {% endfor %}
                 
             </div>
         </div>
