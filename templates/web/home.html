@@ -15,6 +15,12 @@
     <link href="static/adminCustomStyle.css" rel="stylesheet" />
     <!-- Google Fonts-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <script>
+        msg = "{{ msg }}";
+        var data = JSON.parse(msg.replace(/&quot;/g, '"').replace(/&#39;/g, '"').replace(/[\u0000-\u001F]+/g, ""));
+
+    </script>
 </head>
 
 <body>
@@ -86,10 +92,10 @@
                                 Tournament Overview
                             </div>
                             <div class="panel-body">
-                                <p>2023 Smashcat Tournament</p>
-                                Date: 08/11/2023 <br>
+                                <p id="tournament_name">{{ msg.tournament_name }}</p>
+{#                                Date: 08/11/2023 <br>#}
                                 Location: Tucson, USA <br>
-                                Venue: UA Rec Center South Gym <br>
+                                Venue: {{ msg.location }} <br>
                                 Contact: Julie Fan (juliefan@arizona.edu) <br>
                             </div>
                             <div class="panel-footer">
@@ -105,11 +111,10 @@
                                 Tournament Announcement
                             </div>
                             <div class="panel-body">
-                                - The registration deadline is on 04/15/2023. <br>
-                                - MD and WD events are currently full. <br>
+                                {{ msg.announcements }}
                             </div>
                             <div class="panel-footer">
-                                Last Updated: 03/22/2023
+                                Last Updated: 04/22/2023
                             </div>
                         </div>
                     </div>
