@@ -1,6 +1,5 @@
 from flask import session
-from models.tables.login import Login
-from models.tables.users import Users
+from models.models import Login, Users
 
 '''
 This file contains functions that manage player signin and signup

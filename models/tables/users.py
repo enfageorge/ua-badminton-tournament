@@ -34,3 +34,4 @@ class Users(db.Model):
     def __repr__(self):
         return "<Users(id='%d', first_name='%s', last_name='%s', email='%s', login_id='%s')>" % \
             (self.id, self.first_name, self.last_name, self.email, self.login_id)
+

@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home.html">UA Badminton Tournament</a>
+                <a class="navbar-brand" href="{{url_for('web.home')}}">UA Badminton Tournament</a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
@@ -47,7 +47,7 @@
                         <a class="active-menu-public" href="{{url_for('web.tournament')}}"><i class="fa fa-edit"></i> Tournament</a>
                     </li>
                     <li>
-                        <a class="active-menu-public" href="{{url_for('web.players')}}"><i class="fa fa-desktop"></i> Players</a>
+                        <a class="active-menu-public" href="{{url_for('web.public_view_players')}}"><i class="fa fa-desktop"></i> Players</a>
                     </li>
                     <li>
                         <a class="active-menu-public" href="{{url_for('web.events')}}"><i class="fa fa-desktop"></i> Events</a>
@@ -97,49 +97,25 @@
                                                 <th>Email ID.</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>John</td>
-                                                <td>Doe</td>
-                                                <td>John15482</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Kimsila</td>
-                                                <td>Marriye</td>
-                                                <td>Kim1425</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Rossye</td>
-                                                <td>Nermal</td>
-                                                <td>Rossy1245</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Richard</td>
-                                                <td>Orieal</td>
-                                                <td>Rich5685</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Jacob</td>
-                                                <td>Hielsar</td>
-                                                <td>Jac4587</td>
-                                                <td>name@site.com</td>
-                                            </tr>
-                                            <tr>
-                                                <td>6</td>
-                                                <td>Wrapel</td>
-                                                <td>Dere</td>
-                                                <td>Wrap4585</td>
-                                                <td>name@site.com</td>
-                                            </tr>
+                                        <script>
+        window.onload = function () {
+            msg = "{{ msg }}";
+            var data = JSON.parse(msg.replace(/&quot;/g, '"').replace(/&#39;/g, '"').replace(/[\u0000-\u001F]+/g, ""));
+            console.log(data);
+            var output = '';
+            for (var i = 0; i < data.length; i++) {
+                output += '<tr>';
+                output += '<td>' + data[i].id + '</td>';
+                output += '<td>' + data[i].first_name + '</td>';
+                output += '<td>' + data[i].last_name + '</td>';
+                output += '<td>' + data[i].username + '</td>';
+                output += '<td>' + data[i].email + '</td>';
+                output += '</tr>';
+             }
+            document.getElementById('playerRoaster').innerHTML = output;
+        }
+    </script>
+                                        <tbody id="playerRoaster">
 
                                         </tbody>
                                     </table>

@@ -28,7 +28,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home.html">UA Badminton Tournament</a>
+                <a class="navbar-brand" href="{{url_for('web.home')}}">UA Badminton Tournament</a>
             </div>
             <ul class="nav navbar-top-links navbar-right">
                 <li>
@@ -47,7 +47,7 @@
                         <a class="active-menu-public" href="{{url_for('web.tournament')}}"><i class="fa fa-edit"></i> Tournament</a>
                     </li>
                     <li>
-                        <a class="active-menu-public" href="{{url_for('web.players')}}"><i class="fa fa-desktop"></i> Players</a>
+                        <a class="active-menu-public" href="{{url_for('web.public_view_players')}}"><i class="fa fa-desktop"></i> Players</a>
                     </li>
                     <li>
                         <a class="active-menu-public" href="{{url_for('web.events')}}"><i class="fa fa-desktop"></i> Events</a>

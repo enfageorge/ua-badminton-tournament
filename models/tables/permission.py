@@ -16,7 +16,6 @@ class Permission(db.Model):
     def __init__(self, read: bool, write: bool, delete: bool):
         """
         Constructor for Permission Table
-        :param id: Primary Key for the Permission Table
         :param read: Data read permission
         :param write: Data write permission
         :param delete: Data delete permission

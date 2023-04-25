@@ -13,7 +13,6 @@ from models.tables.users import Users
 from models.tables.players_event_seed import PlayersEventSeed
 import json
 
-
 def get_player_details(user_id):
     db.session.expire_all()
     user = Users.query.get(user_id)
