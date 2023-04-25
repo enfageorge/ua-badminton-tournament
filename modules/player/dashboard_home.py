@@ -1,6 +1,6 @@
 from flask import session
 
-from models.models import db
+from app import db
 from models.tables.tournament import Tournament
 from models.tables.event import Event
 from models.tables.match import Match
