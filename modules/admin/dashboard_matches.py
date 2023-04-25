@@ -50,7 +50,6 @@ def get_matches_details():
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
 
-
         side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
         side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
         match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
@@ -78,7 +77,6 @@ def get_matches_details():
                 user = Users.query.get(player.player_id)
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
-
 
         side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
         side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
