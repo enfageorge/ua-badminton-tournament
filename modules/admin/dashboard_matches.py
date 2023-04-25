@@ -52,9 +52,10 @@ def get_matches_details():
                 players_side_two.append(player_name)
                 print(f"players_side_two - {players_side_two}")
 
-        side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
-        side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
-        match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
+        if players_side_one and players_side_two:
+            side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
+            side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
+            match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
         in_progress_match_details.append(match_detail)
 
     finished_match_details = []
@@ -82,13 +83,10 @@ def get_matches_details():
                 players_side_two.append(player_name)
                 print(players_side_two)
 
-        side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
-        side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
-        # match_detail['side_one_players'] = match.side_one_player_1
-        # match_detail['side_one_player_2'] = match.side_one_player_2 # cant do this cos can be null.
-        # match_detail['side_two_player_1'] = match.side_two_player_1
-        # match_detail['side_two_player_2'] = match.side_one_player_2 # cant do this cos can be null.
-        match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
+        if players_side_one and players_side_two:
+            side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
+            side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
+            match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
 
         winner_1 = Player.query.filter_by(player_id=match.result.winner_player_1).first()
         winner_1_user = Users.query.get(winner_1.player_id)
@@ -180,9 +178,10 @@ def get_public_matches_details():
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
 
-        side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
-        side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
-        match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
+        if players_side_one and players_side_two:
+            side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
+            side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
+            match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
 
         upcoming_match_details.append(match_detail)
 
@@ -207,9 +206,10 @@ def get_public_matches_details():
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
 
-        side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
-        side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
-        match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
+        if players_side_one and players_side_two:
+            side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
+            side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
+            match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
 
         in_progress_match_details.append(match_detail)
 
@@ -235,9 +235,10 @@ def get_public_matches_details():
                 player_name = f"{user.first_name} {user.last_name}"
                 players_side_two.append(player_name)
 
-        side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
-        side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
-        match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
+        if players_side_one and players_side_two:
+            side_one_players = " , ".join(players_side_one[:2]) if len(players_side_one) == 2 else players_side_one[0]
+            side_two_players = " , ".join(players_side_two[:2]) if len(players_side_two) == 2 else players_side_two[0]
+            match_detail['match_up'] = f"{side_one_players} vs. {side_two_players}"
 
         winner_1 = Player.query.filter_by(player_id=match.result.winner_player_1).first()
         winner_1_user = Users.query.get(winner_1.player_id)
