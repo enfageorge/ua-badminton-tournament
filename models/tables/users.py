@@ -32,5 +32,6 @@ class Users(db.Model):
         self.login_id = login_id
 
     def __repr__(self):
-        return "<Users(first_name='%s', last_name='%s', email='%s',login_id='%s',player_id='%s')>" % \
-            (self.first_name, self.last_name, self.email, self.login_id, self.player)
+        return "<Users(id='%d', first_name='%s', last_name='%s', email='%s', login_id='%s')>" % \
+            (self.id, self.first_name, self.last_name, self.email, self.login_id)
+

@@ -16,25 +16,63 @@
     <script>
         msg = "{{ msg }}";
         var data = JSON.parse(msg.replace(/&quot;/g, '"').replace(/&#39;/g, '"').replace(/[\u0000-\u001F]+/g, ""));
-        console.log(data);
 
         window.onload = function () {
             const options = document.getElementById('events_checking').querySelectorAll("input[type='checkbox']");
-            console.log(data);
-            dataArr = data.events.split(",").map(item => item.trim());
-            console.log(dataArr);
-
+            dataArr = data.events.map(event => event.name);
             // Iterate through each checkbox and get its value
             for (let i = 0; i < options.length; i++) {
-                const checkbox = options[i];
-                const value = checkbox.value;
-                console.log(value);
-                if (dataArr.includes(value)) {
-                    console.log(" Selected");
+                const value = options[i].value;
+                if (dataArr.some(eventName => eventName === value)) {
                     document.getElementById('events_checking').querySelectorAll("input[type='checkbox']")[i].checked = true;
+                    id = options[i].id + "fieldset"
+
+                    const event = data.events.find(e => e.name === value); // get the event object with matching name
+                    if (event) {
+                        document.getElementById(id).querySelector('input[name="gender_allowed"]').value = event.gender_allowed;
+                        document.getElementById(id).querySelector('input[name="max_participants_allowed"]').value = event.max_participants_allowed;
+                    }
                 }
             }
         }
+
+        function submitForm() {
+            const form = document.querySelector('form');
+            const formData = new FormData(form);
+
+            // Add announcements and events to the form data
+            formData.append('announcements', document.getElementById("announcements").value)
+
+            const options = document.getElementById('events_checking').querySelectorAll("input[type='checkbox']");
+
+            // Iterate through each checkbox and get its value
+            eventsObj = [];
+            for (let i = 0; i < options.length; i++) {
+                if (options[i].checked == true) {
+                    id = options[i].id + "fieldset"
+                    const genderAllowed = document.getElementById(id).querySelector('input[name="gender_allowed"]').value;
+                    const maxParticipantsAllowed = document.getElementById(id).querySelector('input[name="max_participants_allowed"]').value;
+                    eventsObj.push({
+                        [options[i].id]: {
+                            'gender_allowed': genderAllowed,
+                            'max_participants_allowed': maxParticipantsAllowed
+                        }
+                    })
+                }
+            }
+            formData.append('events', JSON.stringify(eventsObj));
+
+            fetch("{{ url_for('admin.admin_tournament_creation') }}", {
+                method: 'POST',
+                body: formData
+            })
+                .then(response => {
+                    if (response.redirected) {
+                        window.location.href = response.url;
+                    }
+                });
+        }
+
     </script>
 </head>
 <body>
@@ -47,11 +85,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href={{ url_for('web.home') }}>UA Badminton Tournament</a>
+            <a class="navbar-brand" href={{url_for('web.home')}}>UA Badminton Tournament</a>
         </div>
         <ul class="nav navbar-top-links navbar-right">
             <li>
-                <a href="{{url_for('user.logout')}}" >Log Out</a>
+                <a href="{{url_for('user.logout')}}">Log Out</a>
             </li>
         </ul>
     </nav>
@@ -102,87 +140,163 @@
                         <div class="panel-body">
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <form role="form">
+                                    <form role="form" method="POST"
+                                          action="{{url_for('admin.admin_tournament_creation')}}">
                                         <div class="form-group">
                                             <label>Name:</label>
-                                            <input class="form-control" value="{{ msg.name }}">
+                                            <input class="form-control" type="text" id="tournament_name"
+                                                   name="tournament_name" name="tournament_name"
+                                                   value="{{ msg.tournament_name }}"
+                                                   required>
                                         </div>
                                         <div class="form-group">
                                             <label>Location:</label>
-                                            <textarea class="form-control"
-                                                      rows="3">{{ msg.venue }}&#13;&#10;{{ msg.location }}</textarea>
+                                            <input class="form-control" type="text" id="location" name="location"
+                                                   value="{{ msg.location }}" required></input>
                                         </div>
                                         <form role="form">
                                             <h5><b>Date/Time:</b></h5>
                                             <div class="form-group">
                                                 <label>Registration Open:</label>
-                                                <input type="datetime-local" class="form-control"
-                                                       value="{{ msg.registration_open }}">
+                                                <input type="datetime-local" id="registration_open"
+                                                       name="registration_open" class="form-control"
+                                                       value="{{ msg.registration_open }}" required>
                                             </div>
                                             <div class="form-group">
-                                                <label>Registration Deadline:</label>
-                                                <input type="datetime-local" class="form-control"
-                                                       value="{{ msg.registration_deadline }}">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Withdraw Deadline:</label>
-                                                <input type="datetime-local" class="form-control"
-                                                       value="{{ msg.withdraw_deadline }}">
+                                                <label>Registration Closed:</label>
+                                                <input type="datetime-local" id="registration_closed"
+                                                       name="registration_closed" class="form-control"
+                                                       value="{{ msg.registration_closed }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Tournament Start Date:</label>
-                                                <input type="datetime-local" class="form-control"
-                                                       value="{{ msg.tournament_start_date }}">
+                                                <input type="datetime-local" id="tournament_start_date"
+                                                       name="tournament_start_date" class="form-control"
+                                                       value="{{ msg.tournament_start_date }}" required>
                                             </div>
                                             <div class="form-group">
                                                 <label>Tournament End Date:</label>
-                                                <input type="datetime-local" class="form-control"
-                                                       value="{{ msg.tournament_end_date }}">
+                                                <input type="datetime-local" id="tournament_end_date"
+                                                       name="tournament_end_date" class="form-control"
+                                                       value="{{ msg.tournament_end_date }}" required>
                                             </div>
                                         </form>
                                         <div class="form-group" id="events_checking">
                                             <label>Events:</label>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="MS">Mens Single (MS)
+                                                    <input type="checkbox" id="MS" value="MS">Mens
+                                                    Single (MS)
                                                 </label>
+                                                <fieldset id="MSfieldset">
+                                                    <label>Gender Allowed:</label>
+                                                    <input type="text"
+                                                           name="gender_allowed" style="width: 80px">
+                                                    <label>Max Participants
+                                                        Allowed:</label>
+                                                    <input type="number"
+                                                           name="max_participants_allowed" style="width: 80px">
+                                                </fieldset>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="MD">Mens Double (MD)
+                                                    <input type="checkbox" id="MD" value="MD">Mens
+                                                    Double (MD)
                                                 </label>
+                                                <fieldset id="MDfieldset">
+                                                    <label>Gender Allowed:</label>
+                                                    <input type="text"
+                                                           name="gender_allowed" style="width: 80px">
+                                                    <label>Max Participants
+                                                        Allowed:</label>
+                                                    <input type="number"
+                                                           name="max_participants_allowed" style="width: 80px">
+                                                </fieldset>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="WS">Womens Single (WS)
+                                                    <input type="checkbox" id="WS" value="WS">Womens
+                                                    Single (WS)
                                                 </label>
+                                                <fieldset id="WSfieldset">
+                                                    <label>Gender Allowed:</label>
+                                                    <input type="text"
+                                                           name="gender_allowed" style="width: 80px">
+                                                    <label>Max Participants
+                                                        Allowed:</label>
+                                                    <input type="number"
+                                                           name="max_participants_allowed" style="width: 80px">
+                                                </fieldset>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="WD">Womens Double (WD)
+                                                    <input type="checkbox" id="WD" value="WD">Womens
+                                                    Double (WD)
                                                 </label>
+                                                <fieldset id="WDfieldset">
+                                                    <label>Gender Allowed:</label>
+                                                    <input type="text"
+                                                           name="gender_allowed" style="width: 80px">
+                                                    <label>Max Participants
+                                                        Allowed:</label>
+                                                    <input type="number"
+                                                           name="max_participants_allowed" style="width: 80px">
+                                                </fieldset>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="XD">Mix Doubles (XD)
+                                                    <input type="checkbox" id="XD" value="XD">Mix
+                                                    Doubles (XD)
                                                 </label>
+                                                <fieldset id="XDfieldset">
+                                                    <label>Gender Allowed:</label>
+                                                    <input type="text"
+                                                           name="gender_allowed" style="width: 80px">
+                                                    <label>Max Participants
+                                                        Allowed:</label>
+                                                    <input type="number"
+                                                           name="max_participants_allowed" style="width: 80px">
+                                                </fieldset>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="U19">Under 19 (U19)
+                                                    <input type="checkbox" id="U19" value="U19">Under
+                                                    19 (U19)
                                                 </label>
+                                                <fieldset id="U19fieldset">
+                                                    <label>Gender Allowed:</label>
+                                                    <input type="text"
+                                                           name="gender_allowed" style="width: 80px">
+                                                    <label>Max Participants
+                                                        Allowed:</label>
+                                                    <input type="number"
+                                                           name="max_participants_allowed" style="width: 80px">
+                                                </fieldset>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" value="U17">Under 17 (U17)
+                                                    <input type="checkbox" id="U17" value="U17">Under
+                                                    17 (U17)
                                                 </label>
+                                                <fieldset id="U17fieldset">
+                                                    <label>Gender Allowed:</label>
+                                                    <input type="text"
+                                                           name="gender_allowed" style="width: 80px">
+                                                    <label>Max Participants
+                                                        Allowed:</label>
+                                                    <input type="number"
+                                                           name="max_participants_allowed" style="width: 80px">
+                                                </fieldset>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label>Regulations:</label>
-                                            <textarea class="form-control" rows="3">{{ msg.Regulations }}</textarea>
+                                            <label>Announcements</label>
+                                            <input class="form-control" type="text" id="announcements"
+                                                   name="announcements" value="{{ msg.announcements }}"></input>
                                         </div>
-                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <button type="submit" class="btn btn-default" name="submit_button"
+                                                onclick="submitForm()">Submit
+                                        </button>
                                         <button type="reset" class="btn btn-default">Reset</button>
                                     </form>
                                 </div>
@@ -193,30 +307,30 @@
                         <!-- /.panel-body -->
                     </div>
                     <!-- /.panel -->
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            Announcements
-                        </div>
-                        <div class="panel-body">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <form role="form">
-                                        <div class="form-group">
-                                            <label>Enter news</label>
-                                            <textarea class="form-control">{{ msg.announcements }}</textarea>
-                                            {#                                            <p class="help-block"></p>#}
-                                        </div>
+                    <!--                    <div class="panel panel-default">-->
+                    <!--                        <div class="panel-heading">-->
+                    <!--                            Announcements-->
+                    <!--                        </div>-->
+                    <!--                        <div class="panel-body">-->
+                    <!--                            <div class="row">-->
+                    <!--                                <div class="col-lg-6">-->
+                    <!--                                    <form role="form">-->
+                    <!--                                        <div class="form-group">-->
+                    <!--                                            <label>Enter news</label>-->
+                    <!--                                            <textarea class="form-control">{{ msg.announcements }}</textarea>-->
+                    <!--                                            {# <p class="help-block"></p>#}-->
+                    <!--                                        </div>-->
 
-                                        <button type="submit" class="btn btn-default">Submit</button>
-                                        <button type="reset" class="btn btn-default">Reset</button>
-                                    </form>
-                                </div>
-                                <!-- /.col-lg-6 (nested) -->
-                            </div>
-                            <!-- /.row (nested) -->
-                        </div>
-                        <!-- /.panel-body -->
-                    </div>
+                    <!--                                        <button type="submit" class="btn btn-default">Submit</button>-->
+                    <!--                                        <button type="reset" class="btn btn-default">Reset</button>-->
+                    <!--                                    </form>-->
+                    <!--                                </div>-->
+                    <!--                                &lt;!&ndash; /.col-lg-6 (nested) &ndash;&gt;-->
+                    <!--                            </div>-->
+                    <!--                            &lt;!&ndash; /.row (nested) &ndash;&gt;-->
+                    <!--                        </div>-->
+                    <!--                        &lt;!&ndash; /.panel-body &ndash;&gt;-->
+                    <!--                    </div>-->
                     <!-- /.panel -->
                 </div>
                 <!-- /.col-lg-12 -->
@@ -228,16 +342,5 @@
     <!-- /. PAGE WRAPPER  -->
 </div>
 <!-- /. WRAPPER  -->
-<!-- JS Scripts-->
-<!-- jQuery Js -->
-<!--    <script src="assets/js/jquery-1.10.2.js"></script>-->
-<!--      &lt;!&ndash; Bootstrap Js &ndash;&gt;-->
-<!--    <script src="assets/js/bootstrap.min.js"></script>-->
-<!--    &lt;!&ndash; Metis Menu Js &ndash;&gt;-->
-<!--    <script src="assets/js/jquery.metisMenu.js"></script>-->
-<!--      &lt;!&ndash; Custom Js &ndash;&gt;-->
-<!--    <script src="assets/js/custom-scripts.js"></script>-->
-
-
 </body>
 </html>

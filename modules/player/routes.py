@@ -6,7 +6,7 @@ from modules.player.dashboard_home import edit_player_details, get_player_detail
 player_app = Blueprint("player", __name__)
 
 
-@player_app.route('/dashboard', methods=['GET', 'POST'])
+@player_app.route('/dashboard', methods=['GET'])
 @user_login_required
 def player_dashboard():
     player_details = get_player_details(session['user_id'])
