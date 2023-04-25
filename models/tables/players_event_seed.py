@@ -14,7 +14,7 @@ class PlayersEventSeed(db.Model):
     players_event_seed_id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     player_1 = db.Column(db.Integer, ForeignKey('player.player_id'), nullable=False)
     player_2 = db.Column(db.Integer, ForeignKey('player.player_id'), nullable=True)
-    seeding_score = db.Column(db.Integer, nullable=True)
+    seeding_score = db.Column(db.Integer, default=0)
     event_id = db.Column(db.Integer, db.ForeignKey('event.event_id'))
     player_1_rel = db.relationship('Player', foreign_keys=[player_1], backref='seed_player_1')
     player_2_rel = db.relationship('Player', foreign_keys=[player_2], backref='seed_player_2')
