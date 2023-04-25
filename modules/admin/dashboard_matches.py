@@ -148,7 +148,6 @@ def get_public_matches_details():
     in_progress_matches = Match.query.filter_by(match_status='in progress').all()
     finished_matches = Match.query.filter_by(match_status='finished').all()
 
-    print(upcoming_matches[1].side_two_player_1)
     upcoming_match_details = []
     in_progress_match_details = []
     finished_match_details = []
