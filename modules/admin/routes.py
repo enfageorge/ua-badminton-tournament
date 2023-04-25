@@ -3,9 +3,8 @@ from flask import Blueprint, render_template, request, redirect
 from modules.admin.dashboard_home import get_player_roaster
 from modules.admin.dashboard_tournament import get_tournament_details,post_tournament_details
 from modules.admin.dashboard_events import get_event_details, assign_seeding
-from modules.admin.dashboard_matches import get_matches_details
+from modules.admin.dashboard_matches import get_matches_details,set_matches_court_no_and_status, set_matches_result
 from modules.admin.draws import make_draws
-
 from modules.decoraters import admin_login_required
 
 admin_app = Blueprint("admin", __name__)
@@ -54,10 +53,29 @@ def enter_seed():
 def make_draw():
     make_draws()
     return redirect('/draws')
-
-
-@admin_app.route('/admin/matches')
+    
+ 
+@admin_app.route('/admin/matches', methods=['GET', 'POST'])
 @admin_login_required
 def admin_matches():
     match_details = get_matches_details()
     return render_template('admin/admin_matches.html', msg=match_details)
+
+
+@admin_app.route('/admin/update_matches', methods=['POST'])
+@admin_login_required
+def update_matches():
+    if request.method == "POST":
+        set_matches_court_no_and_status(request)
+        get_updated_match_details = get_matches_details()
+        return render_template('admin/admin_matches.html', msg=get_updated_match_details)
+
+
+@admin_app.route('/admin/update_results', methods=['POST'])
+@admin_login_required
+def update_results():
+    if request.method == "POST":
+        print(request.form)
+        set_matches_result(request)
+        get_updated_match_details = get_matches_details()
+        return render_template('admin/admin_matches.html', msg=get_updated_match_details)
