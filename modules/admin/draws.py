@@ -70,7 +70,7 @@ def make_draw_for_one_event(event, tournament_id):
 
     # If there are an odd number of registrations, we pair a player with an empty placeholder player
     if len(sorted_players) % 2 != 0:  # There is an odd number of registrations
-        middle_candidate = int(len(sorted_players) / 2) + 1
+        middle_candidate = int(len(sorted_players) / 2)
         player_set = sorted_players[middle_candidate].player_1, sorted_players[middle_candidate].player_2
         if player_set[1] is not None:  # Doubles
             players.append([{'index': index,
