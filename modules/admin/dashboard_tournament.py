@@ -50,17 +50,13 @@ def post_tournament_details(request):
                         event_entry.max_participants_allowed = event_dict[event]['max_participants_allowed']
                     db.session.commit()
             elif event in event_DB and event not in events_request:
-                eventid = Event.query.filter_by(event_name=event).first()
-                for event_seed in PlayersEventSeed.query.filter_by(event_id=eventid).all():
-                    db.session.delete(event_seed)
                 event_entry = Event.query.filter_by(event_name=event).first()
                 db.session.delete(event_entry)
                 db.session.commit()
             elif event not in event_DB and event in events_request:
                 event_dict = next((d for d in events_list_request if d.get(event)), None)
                 if event_dict:
-                    new_event = Event(event, event_dict[event]['gender_allowed'],
-                                      event_dict[event]['max_participants_allowed'])
+                    new_event = Event(event, event_dict[event]['gender_allowed'], event_dict[event]['max_participants_allowed'])
                     db.session.add(new_event)
                     db.session.commit()
     else:
@@ -112,7 +108,6 @@ def post_tournament_details(request):
 
 
 def get_tournament_details(request):
-    # print(Login.query.all())
     tournament_details = {
         'tournament_name': '',
         'location': '',

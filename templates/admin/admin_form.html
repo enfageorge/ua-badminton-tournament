@@ -67,7 +67,6 @@
                 body: formData
             })
                 .then(response => {
-                    alert("Tournament submitted successfully!");
                     if (response.redirected) {
                         window.location.href = response.url;
                     }

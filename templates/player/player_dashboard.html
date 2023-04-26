@@ -21,27 +21,6 @@
             const form = document.querySelector('form');
             const formData = new FormData(form);
 
-            const options = document.getElementById('events_registration').querySelectorAll("input[type='checkbox']");
-
-            // Iterate through each checkbox and get its value
-            eventsObj = {};
-            for (let i = 0; i < options.length; i++) {
-                if (options[i].checked == true) {
-                    id = options[i].name;
-                    if (['WD', 'MD', 'XD'].includes(id)) {
-                        const partner = document.getElementById(id + "_partner").value;
-                        eventsObj[id] = {
-                            'partner': partner
-                        }
-                    } else {
-                        eventsObj[id] = {
-                            'partner': "Singles"
-                        }
-                    }
-                }
-            }
-            formData.append('events', JSON.stringify(eventsObj));
-
             fetch("{{ url_for('player.update_player') }}", {
                 method: 'POST',
                 body: formData
@@ -54,52 +33,46 @@
         }
 
         window.onload = function () {
-            gender = '{{ msg.competing_gender }}';
+            gender = '{{ msg.competing_gender | tojson }}';
+            gender = gender.toUpperCase();
 
             var events = '{{ msg.event | tojson }}';
-            var all_events = '{{ msg.all_events | tojson }}'
             const eventsDiv = document.querySelector('#events_registration');
             events = JSON.parse(events);
+            var event_list = events.shift();
+            events.forEach((event) => {
+                for (const [key, value] of Object.entries(event)) {
+                    const div = document.createElement('div');
+                    div.setAttribute("class", "checkbox");
+                    const label = document.createElement('label');
+                    const input = document.createElement('input');
+                    var labelText = document.createTextNode(key);
 
-            all_events = JSON.parse(all_events);
-            all_events.forEach((event) => {
-                const div = document.createElement('div');
-                div.setAttribute("class", "checkbox");
-                const label = document.createElement('label');
-                const input = document.createElement('input');
-                var labelText = document.createTextNode(event);
+                    input.type = 'checkbox';
+                    input.name = key;
+                    input.value = key;
 
-                input.type = 'checkbox';
-                input.name = event;
-                input.value = event;
+                    label.appendChild(input);
+                    label.appendChild(labelText);
+                    div.appendChild(label);
 
-                label.appendChild(input);
-                label.appendChild(labelText);
-                div.appendChild(label);
-
-                for (let i = 0; i < events.length; i++) {
-                    if (events[i].hasOwnProperty(event)) {
+                    if (event_list.includes(key)) {
                         input.checked = true;
-                        break;
                     }
-                }
 
-                if (event === "MD" || event === "WD" || event === "XD") {
-                    const input2 = document.createElement('input');
-                    input2.type = 'text';
-                    input2.id = event + '_partner';
-                    input2.placeholder = 'Partner name';
-                    input2.style = "margin-left: 10px";
-
-                    for (let i = 0; i < events.length; i++) {
-                        if (events[i].hasOwnProperty(event)) {
-                            input2.value = Object.values(events[i])[0];
-                            break;
+                    if (key === "MD" || key === "WD" || key === "XD") {
+                        const input2 = document.createElement('input');
+                        input2.type = 'text';
+                        input2.name = key + '_partner';
+                        input2.placeholder = 'Partner name';
+                        input2.style = "margin-left: 10px";
+                        if (event_list.includes(key)) {
+                            input2.value = value;
                         }
+                        label.append(input2);
                     }
-                    label.append(input2);
+                    eventsDiv.appendChild(div);
                 }
-                eventsDiv.appendChild(div);
             });
         };
 
@@ -137,6 +110,7 @@
                     <a class="active-menu-public" href="{{url_for('player.player_dashboard')}}"><i
                             class="fa fa-dashboard"></i> Dashboard</a>
                 </li>
+
             </ul>
         </div>
     </nav>
@@ -203,16 +177,16 @@
                                                    placeholder="Enter your club" value="{{msg.club_name}}">
                                             <p class="help-block">Ex. UA Badminton Club</p>
                                         </div>
+                                        <form>
+                                            <div class="form-group" id="events_registration">
+                                                <label>Events:</label>
+                                            </div>
+                                        </form>
 
+                                        <button type="submit" class="btn btn-default" name="submit_button"
+                                                onclick="submitForm()">Save
+                                        </button>
                                     </form>
-                                    <form>
-                                        <div id="events_registration">
-                                            <label>Events:</label>
-                                        </div>
-                                    </form>
-                                    <button type="submit" class="btn btn-default" name="submit_button"
-                                            onclick="submitForm()">Save
-                                    </button>
                                 </div>
                             </div>
                             <!-- /.row (nested) -->
